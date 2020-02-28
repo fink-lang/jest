@@ -1,0 +1,11 @@
+{process} = import `.`
+
+
+describe:: process, fn:
+
+  it:: `compiles fink`, fn:
+    {code, map} = process:: `foo = 1234`, `foobar.fnk`, {rootDir: `./src`}
+
+    expect({code, map}).toMatchSnapshot()
+
+  undefined
