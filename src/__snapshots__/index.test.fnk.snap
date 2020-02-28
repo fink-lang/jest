@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`process compiles fink 1`] = `
+Object {
+  "code": "const foo = 1234;
+Object.assign(module.exports, {
+  foo
+});",
+  "map": Object {
+    "mappings": "MAAA,G,GAAM,I",
+    "names": Array [],
+    "sources": Array [
+      "foobar.fnk",
+    ],
+    "sourcesContent": Array [
+      "foo = 1234",
+    ],
+    "version": 3,
+  },
+}
+`;
