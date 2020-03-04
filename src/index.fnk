@@ -6,7 +6,7 @@ babel_istanbul = import `babel-plugin-istanbul`
 
 
 transform = fn source, filename:
-  fink_ast = parse(source)
+  fink_ast = parse(source, filename)
   generate(fink_ast, filename, source)
 
 

@@ -8,4 +8,18 @@ describe:: process, fn:
 
     expect({code, map}).toMatchSnapshot()
 
+
+  it:: `handles errors`, fn:
+
+
+    expect(
+      fn: process:: `123 = foo`, `foobar.fnk`, {rootDir: `./src`}
+    ).toThrow(`
+      foobar.fnk:1:0
+      1| 123 = foo
+         ^
+
+      Unable to transform 'assign ='.
+    `)
+
   undefined
