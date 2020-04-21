@@ -1,25 +1,22 @@
-{process} = import `./transform`
+{process} = import './transform'
+{describe, it, expect, to_match_snapshot, to_throw} = import '.'
 
 
 describe:: process, fn:
 
-  it:: `compiles fink`, fn:
-    {code, map} = process:: `foo = 1234`, `foobar.fnk`, {rootDir: `./src`}
+  it:: 'compiles fink', fn:
+    {code, map} = process:: 'foo = 1234', 'foobar.fnk', {rootDir: './src'}
 
-    expect({code, map}).toMatchSnapshot()
+    expect::
+      {code, map}
+      to_match_snapshot
 
+  it:: 'handles errors', fn:
+    expect::
+      fn: process:: '123 = foo', 'foobar.fnk', {rootDir: './src'}
+      to_throw:: `
+        foobar.fnk:1:0
+        1| 123 = foo
+           ^
 
-  it:: `handles errors`, fn:
-
-
-    expect(
-      fn: process:: `123 = foo`, `foobar.fnk`, {rootDir: `./src`}
-    ).toThrow(`
-      foobar.fnk:1:0
-      1| 123 = foo
-         ^
-
-      Unable to transform 'assign ='.
-    `)
-
-  undefined
+        Unable to transform 'assign ='`
