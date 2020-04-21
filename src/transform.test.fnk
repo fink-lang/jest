@@ -1,4 +1,4 @@
-{process} = import `.`
+{process} = import `./transform`
 
 
 describe:: process, fn:
