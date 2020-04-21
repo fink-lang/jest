@@ -1,25 +1,64 @@
-{process} = import `.`
+{describe, it, skip, only} = import '.'
+{expect, not, to_match_snapshot, to_equal} = import '.'
+{mock_fn, to_be_called, to_be_called_with, any, to_throw} = import '.'
 
 
-describe:: process, fn:
+only.describe:: 'test utils', fn:
 
-  it:: `compiles fink`, fn:
-    {code, map} = process:: `foo = 1234`, `foobar.fnk`, {rootDir: `./src`}
+  only.it:: 'equality', fn:
+    expect::
+      'foobar'
+      to_equal:: 'foobar'
 
-    expect({code, map}).toMatchSnapshot()
+    expect::
+      'foobar'
+      not:: to_equal:: 'spam'
 
 
-  it:: `handles errors`, fn:
+  only.it:: 'tests mock funks', fn:
+    foo = mock_fn:: fn: null
+
+    expect::
+      foo
+      not:: to_be_called
+
+    foo:: 'bar'
+
+    expect::
+      foo
+      to_be_called
+
+    expect::
+      foo
+      to_be_called_with:: any:: String
+
+    expect::
+      foo
+      not:: to_be_called_with:: any:: Number
+
+    expect::
+      foo
+      to_be_called_with:: 'bar'
 
 
-    expect(
-      fn: process:: `123 = foo`, `foobar.fnk`, {rootDir: `./src`}
-    ).toThrow(`
-      foobar.fnk:1:0
-      1| 123 = foo
-         ^
+  only.it:: 'tests exceptions', fn:
+    foo = mock_fn::
+      # istanbul ignore next
+      fn msg:
+        throw new Error:: msg
+        null
 
-      Unable to transform 'assign ='.
-    `)
+    expect::
+      fn: foo:: 'test'
+      to_throw:: `test`
 
+
+  skip.it:: 'skips',
+    # istanbul ignore next
+    fn:
+      throw new Error:: 'fail'
+      null
+
+
+skip.describe:: 'test utils', fn:
   undefined

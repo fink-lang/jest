@@ -3,7 +3,7 @@ module.exports = {
   testEnvironment: 'node',
   setupFiles: [],
   moduleFileExtensions: ['js', 'fnk'],
-  transform: {'^.+\\.fnk$': ['<rootDir>/build/pkg/index.js']},
+  transform: {'^.+\\.fnk$': ['<rootDir>/build/pkg/transform.js']},
   transformIgnorePatterns: ['.+/node_modules/', '<rootDir>/build/'],
 
   modulePathIgnorePatterns: ['<rootDir>/build/'],

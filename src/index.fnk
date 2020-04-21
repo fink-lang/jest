@@ -1,35 +1,66 @@
-{transformSync: babelTransform} = import `@babel/core`
-{parse} = import `@fink/larix`
-{generate} = import `@fink/loxia`
 
-babel_istanbul = import `babel-plugin-istanbul`
+skip = {
+  it: fn ...args:
+    global.it.skip:: ...args
+
+  describe: fn descr, tests:
+    global.describe.skip:: descr, fn:
+      tests()
+      undefined
+}
 
 
-transform = fn source, filename:
-  fink_ast = parse(source, filename)
-  generate(fink_ast, filename, source)
+only = {
+  it: fn ...args:
+    global.it.only:: ...args
+
+  describe: fn descr, tests:
+    global.describe.only:: descr, fn:
+      tests()
+      undefined
+}
 
 
-process = fn src, filename, {rootDir}:
-  {code: js_code, map: input_source_map} = transform(src, filename)
+describe = fn descr, tests:
+  global.describe:: descr, fn:
+    tests()
+    undefined
 
-  opts = {
-    filename,
-    sourceMap: true,
-    inputSourceMap: input_source_map,
-    auxiliaryCommentBefore: ` istanbul ignore next `,
-    plugins: [
-      [
-        babel_istanbul,
-        {
-          cwd: rootDir,
-          include: [`**/*.fnk`],
-          extension: `.fnk`,
-          inputSourceMap: input_source_map
-        }
-      ]
-    ]
-  }
 
-  babelTransform(js_code, opts)
+it = fn descr, test, timeout:
+  global.it:: descr, test, timeout
 
+
+any = global.expect.any
+
+
+mock_fn = fn ...args:
+  jest.fn:: ...args
+
+
+not = fn expected: fn expect_actual:
+  expected:: expect_actual.not
+
+
+to_equal = fn expected: fn expect_actual:
+  expect_actual.toEqual:: expected
+
+
+to_match_snapshot = fn expect_actual:
+  expect_actual.toMatchSnapshot()
+
+
+to_be_called = fn expect_actual:
+  expect_actual.toBeCalled()
+
+
+to_be_called_with = fn ...expected: fn expect_actual:
+  expect_actual.toBeCalledWith:: ...expected
+
+
+to_throw = fn expected: fn expect_actual:
+  expect_actual.toThrow:: expected
+
+
+expect = fn actual, expectation:
+  expectation:: global.expect:: actual

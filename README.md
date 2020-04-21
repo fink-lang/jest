@@ -13,7 +13,7 @@ module.exports = {
 
   transform: {
     ...
-    '^.+\\.fnk$': ['@fink/jest']
+    '^.+\\.fnk$': ['@fink/jest/transform']
   },
 
   ...
