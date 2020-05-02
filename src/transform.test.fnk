@@ -2,19 +2,35 @@
 {describe, it, expect, to_match_snapshot, to_throw} = import '.'
 
 
-describe:: process, fn:
+describe process, fn:
 
-  it:: 'compiles fink', fn:
-    {code, map} = process:: 'foo = 1234', 'foobar.fnk', {rootDir: './src'}
+  it 'compiles fink', fn:
+    {code, map} = process
+      'foo = 1234 || spam'
+      '/temp/src/foobar.fnk'
+      {rootDir: '/temp/src'}
 
-    expect::
+    expect
       {code, map}
       to_match_snapshot
 
-  it:: 'handles errors', fn:
-    expect::
-      fn: process:: '123 = foo', 'foobar.fnk', {rootDir: './src'}
-      to_throw:: `
+
+  it 'compiles fink with cov', fn:
+    {code, map} = process
+      'foo = 1234 || spam'
+      '/temp/src/foobar.fnk'
+      {rootDir: '/temp/src'}
+      {instrument: true}
+
+    expect
+      {code, map}
+      to_match_snapshot
+
+
+  it 'handles errors', fn:
+    expect
+      fn: process '123 = foo', 'foobar.fnk', {rootDir: './src'}
+      to_throw `
         foobar.fnk:1:0
         1| 123 = foo
            ^

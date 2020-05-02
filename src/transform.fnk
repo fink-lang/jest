@@ -5,31 +5,36 @@
 babel_istanbul = import `babel-plugin-istanbul`
 
 
+istanbul_plugin = fn cwd, input_source_map:
+  list:
+    babel_istanbul
+    dict:
+      cwd
+      include: [`**/*.fnk`]
+      extension: `.fnk`
+      inputSourceMap: input_source_map
+
+
 transform = fn source, filename:
-  fink_ast = parse(source, filename)
-  generate(fink_ast, filename, source)
+  fink_ast = parse source, filename
+  generate fink_ast, filename, source
 
 
-process = fn src, filename, {rootDir}:
-  {code: js_code, map: input_source_map} = transform(src, filename)
+process = fn src, filename, {rootDir}, transform_opts:
+  {code: js_code, map: input_source_map} = transform src, filename
 
-  opts = {
-    filename,
+  plugins = match transform_opts:
+    {instrument: true}:
+      [istanbul_plugin rootDir, input_source_map]
+    else:
+      []
+
+  opts = dict:
+    filename
     sourceMap: true,
-    inputSourceMap: input_source_map,
-    auxiliaryCommentBefore: ` istanbul ignore next `,
-    plugins: [
-      [
-        babel_istanbul,
-        {
-          cwd: rootDir,
-          include: [`**/*.fnk`],
-          extension: `.fnk`,
-          inputSourceMap: input_source_map
-        }
-      ]
-    ]
-  }
+    inputSourceMap: input_source_map
+    auxiliaryCommentBefore: ` istanbul ignore next `
+    plugins
 
-  babelTransform(js_code, opts)
+  babelTransform js_code, opts
 
