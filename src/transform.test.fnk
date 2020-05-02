@@ -7,8 +7,8 @@ describe process, fn:
   it 'compiles fink', fn:
     {code, map} = process
       'foo = 1234 || spam'
-      './src/foobar.fnk'
-      {rootDir: './src'}
+      '/temp/src/foobar.fnk'
+      {rootDir: '/temp/src'}
 
     expect
       {code, map}
@@ -18,8 +18,8 @@ describe process, fn:
   it 'compiles fink with cov', fn:
     {code, map} = process
       'foo = 1234 || spam'
-      './src/foobar.fnk'
-      {rootDir: './src'}
+      '/temp/src/foobar.fnk'
+      {rootDir: '/temp/src'}
       {instrument: true}
 
     expect
