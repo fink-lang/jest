@@ -1,64 +1,85 @@
-{describe, it, skip, only} = import '.'
-{expect, not, to_match_snapshot, to_equal} = import '.'
-{mock_fn, to_be_called, to_be_called_with, any, to_throw} = import '.'
+{describe, it, skip, only, expect, any, mock, mock_fn} = import '.'
+{to_match_snapshot, to_equal, to_not_equal} = import '.'
+{was_called, was_not_called, was_called_with, was_not_called_with} = import '.'
+{to_throw, to_not_throw} = import '.'
 
 
-only.describe:: 'test utils', fn:
+mock_test = mock_fn fn: 'testing'
 
-  only.it:: 'equality', fn:
-    expect::
+mock '@fink/test'
+  fn: dict:
+    test: mock_test
+  {virtual: true}
+
+{test} = import '@fink/test'
+
+
+only.describe 'test utils', fn:
+
+  only.it 'equality', fn:
+    expect
       'foobar'
-      to_equal:: 'foobar'
+      to_equal 'foobar'
 
-    expect::
+    expect
       'foobar'
-      not:: to_equal:: 'spam'
+      to_not_equal 'spam'
 
 
-  only.it:: 'tests mock funks', fn:
-    foo = mock_fn:: fn: null
+  only.it 'tests mock funks', fn:
+    foo = mock_fn fn: null
 
-    expect::
+    expect
       foo
-      not:: to_be_called
+      was_not_called
 
-    foo:: 'bar'
+    foo 'bar'
 
-    expect::
+    expect
       foo
-      to_be_called
+      was_called
 
-    expect::
+    expect
       foo
-      to_be_called_with:: any:: String
+      was_called_with any String
 
-    expect::
+    expect
       foo
-      not:: to_be_called_with:: any:: Number
+      was_not_called_with any Number
 
-    expect::
+    expect
       foo
-      to_be_called_with:: 'bar'
+      was_called_with 'bar'
 
 
-  only.it:: 'tests exceptions', fn:
-    foo = mock_fn::
+  only.it 'test mock module', fn:
+    test 'testing'
+    expect
+      mock_test
+      was_called_with 'testing'
+
+
+  only.it 'tests exceptions', fn:
+    foo = mock_fn
       # istanbul ignore next
       fn msg:
-        throw new Error:: msg
+        throw new Error msg
         null
 
-    expect::
-      fn: foo:: 'test'
-      to_throw:: `test`
+    expect
+      fn: foo 'test'
+      to_throw `test`
 
+    expect
+      fn: 'test'
+      to_not_throw()
 
-  skip.it:: 'skips',
+  skip.it 'skips',
     # istanbul ignore next
     fn:
-      throw new Error:: 'fail'
+      throw new Error 'fail'
       null
 
 
-skip.describe:: 'test utils', fn:
+skip.describe 'test utils', fn:
   undefined

@@ -1,66 +1,79 @@
+{describe: jest_describe, it: jest_it} = import '@jest/globals'
+{expect: jest_expect} = import '@jest/globals'
 
-skip = {
+
+skip = dict:
   it: fn ...args:
-    global.it.skip:: ...args
+    jest_it.skip ...args
 
   describe: fn descr, tests:
-    global.describe.skip:: descr, fn:
+    jest_describe.skip descr, fn:
       tests()
       undefined
-}
 
 
-only = {
+only = dict:
   it: fn ...args:
-    global.it.only:: ...args
+    jest_it.only ...args
 
   describe: fn descr, tests:
-    global.describe.only:: descr, fn:
+    jest_describe.only descr, fn:
       tests()
       undefined
-}
 
 
 describe = fn descr, tests:
-  global.describe:: descr, fn:
+  jest_describe descr, fn:
     tests()
     undefined
 
 
 it = fn descr, test, timeout:
-  global.it:: descr, test, timeout
+  jest_it descr, test, timeout
 
 
-any = global.expect.any
+any = jest_expect.any
 
 
 mock_fn = fn ...args:
-  jest.fn:: ...args
+  jest.fn ...args
 
 
-not = fn expected: fn expect_actual:
-  expected:: expect_actual.not
+mock = fn ...args:
+  jest.mock ...args
 
 
 to_equal = fn expected: fn expect_actual:
-  expect_actual.toEqual:: expected
+  expect_actual.toEqual expected
+
+to_not_equal = fn expected: fn expect_actual:
+  expect_actual.not.toEqual expected
 
 
 to_match_snapshot = fn expect_actual:
   expect_actual.toMatchSnapshot()
 
 
-to_be_called = fn expect_actual:
+was_called = fn expect_actual:
   expect_actual.toBeCalled()
 
+was_not_called = fn expect_actual:
+  expect_actual.not.toBeCalled()
 
-to_be_called_with = fn ...expected: fn expect_actual:
-  expect_actual.toBeCalledWith:: ...expected
+
+was_called_with = fn ...expected: fn expect_actual:
+  expect_actual.toHaveBeenCalledWith ...expected
+
+was_not_called_with = fn ...expected: fn expect_actual:
+  expect_actual.not.toHaveBeenCalledWith ...expected
 
 
 to_throw = fn expected: fn expect_actual:
-  expect_actual.toThrow:: expected
+  expect_actual.toThrow expected
+
+to_not_throw = fn expected: fn expect_actual:
+  expect_actual.not.toThrow expected
 
 
 expect = fn actual, expectation:
-  expectation:: global.expect:: actual
+  expectation jest_expect actual
