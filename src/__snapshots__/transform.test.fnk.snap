@@ -2,18 +2,147 @@
 
 exports[`process compiles fink 1`] = `
 Object {
-  "code": "const foo = 1234;
+  "code": "const foo = 1234 || spam;
 Object.assign(module.exports, {
   foo
 });",
   "map": Object {
-    "mappings": "MAAA,G,GAAM,I",
+    "mappings": "MAAA,G,GAAM,QAAQ,I",
     "names": Array [],
     "sources": Array [
-      "foobar.fnk",
+      "src/foobar.fnk",
     ],
     "sourcesContent": Array [
-      "foo = 1234",
+      "foo = 1234 || spam",
+    ],
+    "version": 3,
+  },
+}
+`;
+
+exports[`process compiles fink with cov 1`] = `
+Object {
+  "code": "/* istanbul ignore next */
+function cov_1eidqdiw3e() {
+  var path = \\"/Users/jan/Develop/fink/jest/src/foobar.fnk\\";
+  var hash = \\"6690b9df05185ac70af1b85723cc7aadfd6799be\\";
+  var global = new Function(\\"return this\\")();
+  var gcv = \\"__coverage__\\";
+  var coverageData = {
+    path: \\"/Users/jan/Develop/fink/jest/src/foobar.fnk\\",
+    statementMap: {
+      \\"0\\": {
+        start: {
+          line: 1,
+          column: 12
+        },
+        end: {
+          line: 1,
+          column: 24
+        }
+      },
+      \\"1\\": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 4,
+          column: 3
+        }
+      }
+    },
+    fnMap: {},
+    branchMap: {
+      \\"0\\": {
+        loc: {
+          start: {
+            line: 1,
+            column: 12
+          },
+          end: {
+            line: 1,
+            column: 24
+          }
+        },
+        type: \\"binary-expr\\",
+        locations: [{
+          start: {
+            line: 1,
+            column: 12
+          },
+          end: {
+            line: 1,
+            column: 16
+          }
+        }, {
+          start: {
+            line: 1,
+            column: 20
+          },
+          end: {
+            line: 1,
+            column: 24
+          }
+        }],
+        line: 1
+      }
+    },
+    s: {
+      \\"0\\": 0,
+      \\"1\\": 0
+    },
+    f: {},
+    b: {
+      \\"0\\": [0, 0]
+    },
+    inputSourceMap: {
+      version: 3,
+      sources: [\\"./src/foobar.fnk\\"],
+      names: [],
+      mappings: \\"MAAA,G,GAAM,QAAQ,I\\",
+      sourcesContent: [\\"foo = 1234 || spam\\"]
+    },
+    _coverageSchema: \\"1a1c01bbd47fc00a2c39e90264f33305004495a9\\",
+    hash: \\"6690b9df05185ac70af1b85723cc7aadfd6799be\\"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+
+  cov_1eidqdiw3e = function () {
+    return actualCoverage;
+  };
+
+  return actualCoverage;
+}
+
+cov_1eidqdiw3e();
+const foo =
+/* istanbul ignore next */
+(cov_1eidqdiw3e().s[0]++,
+/* istanbul ignore next */
+(cov_1eidqdiw3e().b[0][0]++, 1234) ||
+/* istanbul ignore next */
+(cov_1eidqdiw3e().b[0][1]++, spam));
+
+/* istanbul ignore next */
+cov_1eidqdiw3e().s[1]++;
+Object.assign(module.exports, {
+  foo
+});",
+  "map": Object {
+    "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;MAAA,G;;;AAAM;AAAA;AAAA;AAAA,6BAAQ,IAAR,C",
+    "names": Array [],
+    "sources": Array [
+      "src/foobar.fnk",
+    ],
+    "sourcesContent": Array [
+      "foo = 1234 || spam",
     ],
     "version": 3,
   },
