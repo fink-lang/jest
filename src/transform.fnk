@@ -1,8 +1,8 @@
-{transformSync: babelTransform} = import `@babel/core`
-{parse} = import `@fink/larix`
-{generate} = import `@fink/loxia`
+{transformSync: babelTransform} = import '@babel/core'
+{parse} = import '@fink/larix'
+{generate} = import '@fink/loxia'
 
-babel_istanbul = import `babel-plugin-istanbul`
+babel_istanbul = import 'babel-plugin-istanbul'
 
 
 istanbul_plugin = fn cwd, input_source_map:
@@ -10,14 +10,30 @@ istanbul_plugin = fn cwd, input_source_map:
     babel_istanbul
     dict:
       cwd
-      include: [`**/*.fnk`]
-      extension: `.fnk`
+      include: ['**/*.fnk']
+      extension: '.fnk'
       inputSourceMap: input_source_map
 
 
 transform = fn source, filename:
-  fink_ast = parse source, filename
-  generate fink_ast, filename, source
+  parse_result = parse source, filename
+
+  ast = match parse_result:
+    # TODO investigate why istanbul thinks we are not covering else
+    # istanbul ignore else
+    [{}, {errors: {length: 0}}]:
+      [ast] = parse_result
+      ast
+
+    else:
+      [, parse_ctx] = parse_result
+      {errors: [{error, stack}]} = parse_ctx
+
+      err = new SyntaxError error
+      Object.assign err, {stack: '${error}${stack}'}
+      throw err
+
+  generate ast, filename, source
 
 
 process = fn src, filename, {rootDir}, transform_opts:
@@ -33,7 +49,7 @@ process = fn src, filename, {rootDir}, transform_opts:
     filename
     sourceMap: true,
     inputSourceMap: input_source_map
-    auxiliaryCommentBefore: ` istanbul ignore next `
+    auxiliaryCommentBefore: ' istanbul ignore next '
     plugins
 
   babelTransform js_code, opts

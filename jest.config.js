@@ -12,6 +12,8 @@ module.exports = {
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/build/'],
   watchPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/build/'],
 
+  snapshotResolver: '<rootDir>/build/pkg/snapshot-resolver',
+
   timers: 'fake',
 
   clearMocks: true,

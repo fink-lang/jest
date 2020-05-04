@@ -1,0 +1,17 @@
+{describe, it, expect, to_equal} = import '.'
+{resolveSnapshotPath, resolveTestPath} = import './snapshot-resolver'
+
+
+describe 'snapshot-resolver', fn:
+
+  it 'resolves test path', fn:
+    expect
+      resolveTestPath './foobar.fnk.snap', '.snap'
+      to_equal './foobar.fnk'
+
+
+  it 'resolves snapshot path', fn:
+    expect
+      resolveSnapshotPath './foobar.fnk', '.snap'
+      to_equal './foobar.fnk.snap'
+
