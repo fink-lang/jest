@@ -68,7 +68,7 @@ only.describe 'test utils', fn:
 
     expect
       fn: foo 'test'
-      to_throw `test`
+      to_throw 'test'
 
     expect
       fn: 'test'

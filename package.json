@@ -32,10 +32,14 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
+  "peerDependencies": {
+    "@fink/larix": ">=8.0.0",
+    "@fink/loxia": ">=7.0.0"
+  },
   "devDependencies": {
-    "@fink/cli": "^3.1.0",
-    "@fink/larix": "^7.0.0",
-    "@fink/loxia": "^6.0.0",
+    "@fink/cli": "^4.0.1",
+    "@fink/larix": "^8.0.0",
+    "@fink/loxia": "^7.0.0",
     "commitizen": "^4.0.3",
     "cz-conventional-changelog": "^3.1.0",
     "jest-cli": "^25.1.0",

@@ -35,12 +35,9 @@ it = fn descr, test, timeout:
 any = jest_expect.any
 
 
-mock_fn = fn ...args:
-  jest.fn ...args
+mock_fn = jest.fn
 
-
-mock = fn ...args:
-  jest.mock ...args
+mock = jest.mock
 
 
 to_equal = fn expected: fn expect_actual:
