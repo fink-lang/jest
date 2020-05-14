@@ -1,6 +1,7 @@
-{transformSync: babelTransform} = import '@babel/core'
+{transformSync: babel_transform} = import '@babel/core'
 {parse} = import '@fink/larix'
 {generate} = import '@fink/loxia'
+{set_props} = import '@fink/std-lib/obj'
 
 babel_istanbul = import 'babel-plugin-istanbul'
 
@@ -15,42 +16,53 @@ istanbul_plugin = fn cwd, input_source_map:
       inputSourceMap: input_source_map
 
 
-transform = fn source, filename:
-  parse_result = parse source, filename
-
-  ast = match parse_result:
+handle_error = fn obj_with_errors:
+  match obj_with_errors:
     # TODO investigate why istanbul thinks we are not covering else
     # istanbul ignore else
-    [{}, {errors: {length: 0}}]:
-      [ast] = parse_result
-      ast
-
-    else:
-      [, parse_ctx] = parse_result
-      {errors: [{error, stack}]} = parse_ctx
+    {errors: [{}]}:
+      {errors: [{error, stack}]} = obj_with_errors
 
       err = new SyntaxError error
-      Object.assign err, {stack: '${error}${stack}'}
+      set_props err, {stack: '${error}${stack}'}
       throw err
+    else:
+      obj_with_errors
 
-  generate ast, filename, source
+
+transform = fn source, filename:
+  ast = parse source, filename
+  handle_error ast
+  # TODO should loxia have it's own setting for source_map
+  # TODO or aslways generate them
+  opts = dict:
+    module_type: 'cjs'
+    generatorOpts: dict:
+      filename
+      sourceFileName: filename
+      sourceMaps: true
+
+  compiled = generate ast, filename, source, opts
+  handle_error compiled
 
 
 process = fn src, filename, {rootDir}, transform_opts:
-  {code: js_code, map: input_source_map} = transform src, filename
+  {code: js_code, source_map} = transform src, filename
 
   plugins = match transform_opts:
     {instrument: true}:
-      [istanbul_plugin rootDir, input_source_map]
+      [istanbul_plugin rootDir, source_map]
     else:
       []
 
   opts = dict:
     filename
     sourceMap: true,
-    inputSourceMap: input_source_map
+    inputSourceMap: source_map
     auxiliaryCommentBefore: ' istanbul ignore next '
     plugins
 
-  babelTransform js_code, opts
+  # TODO can we use transformFromAstSync with ast from loxia
+  # TODO instead of having to reparse generated js
+  babel_transform js_code, opts
 
