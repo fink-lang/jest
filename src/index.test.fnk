@@ -1,5 +1,5 @@
-{describe, it, skip, only, expect, any, mock, mock_fn} = import '.'
-{to_match_snapshot, to_equal, to_not_equal} = import '.'
+{skip, only, expect, any, mock, mock_fn} = import '.'
+{to_equal, to_not_equal} = import '.'
 {was_called, was_not_called, was_called_with, was_not_called_with} = import '.'
 {to_throw, to_not_throw} = import '.'
 
@@ -82,4 +82,4 @@ only.describe 'test utils', fn:
 
 
 skip.describe 'test utils', fn:
-  undefined
+  null

@@ -3,11 +3,9 @@
 exports[`process compiles fink 1`] = `
 Object {
   "code": "const foo = 1234 || spam;
-Object.assign(module.exports, {
-  foo
-});",
+exports.foo = foo;",
   "map": Object {
-    "mappings": "MAAA,G,GAAM,QAAQ,I",
+    "mappings": "MAAA,G,GAAM,QAAQ,I;QAAd,G,GAAA,G",
     "names": Array [],
     "sources": Array [
       "/temp/src/foobar.fnk",
@@ -25,7 +23,7 @@ Object {
   "code": "/* istanbul ignore next */
 function cov_2ozalsxixv() {
   var path = \\"/temp/src/foobar.fnk\\";
-  var hash = \\"9b37ab2f5ed5771a783d53c97e2b758cf69e54cd\\";
+  var hash = \\"755502afb33987bf57ebee55c348f195d62b0c0a\\";
   var global = new Function(\\"return this\\")();
   var gcv = \\"__coverage__\\";
   var coverageData = {
@@ -47,8 +45,8 @@ function cov_2ozalsxixv() {
           column: 0
         },
         end: {
-          line: 4,
-          column: 3
+          line: 2,
+          column: 18
         }
       }
     },
@@ -100,11 +98,11 @@ function cov_2ozalsxixv() {
       version: 3,
       sources: [\\"/temp/src/foobar.fnk\\"],
       names: [],
-      mappings: \\"MAAA,G,GAAM,QAAQ,I\\",
+      mappings: \\"MAAA,G,GAAM,QAAQ,I;QAAd,G,GAAA,G\\",
       sourcesContent: [\\"foo = 1234 || spam\\"]
     },
     _coverageSchema: \\"1a1c01bbd47fc00a2c39e90264f33305004495a9\\",
-    hash: \\"9b37ab2f5ed5771a783d53c97e2b758cf69e54cd\\"
+    hash: \\"755502afb33987bf57ebee55c348f195d62b0c0a\\"
   };
   var coverage = global[gcv] || (global[gcv] = {});
 
@@ -113,11 +111,12 @@ function cov_2ozalsxixv() {
   }
 
   var actualCoverage = coverage[path];
-
-  cov_2ozalsxixv = function () {
-    return actualCoverage;
-  };
-
+  {
+    // @ts-ignore
+    cov_2ozalsxixv = function () {
+      return actualCoverage;
+    };
+  }
   return actualCoverage;
 }
 
@@ -132,11 +131,9 @@ const foo =
 
 /* istanbul ignore next */
 cov_2ozalsxixv().s[1]++;
-Object.assign(module.exports, {
-  foo
-});",
+exports.foo = foo;",
   "map": Object {
-    "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;MAAA,G;;;AAAM;AAAA;AAAA;AAAA,6BAAQ,IAAR,C",
+    "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;MAAA,G;;;AAAM;AAAA;AAAA;AAAA,6BAAQ,IAAR,C;;;;QAAN,G,GAAA,G",
     "names": Array [],
     "sources": Array [
       "/temp/src/foobar.fnk",
