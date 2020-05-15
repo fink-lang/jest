@@ -18,8 +18,6 @@ istanbul_plugin = fn cwd, input_source_map:
 
 handle_error = fn obj_with_errors:
   match obj_with_errors:
-    # TODO investigate why istanbul thinks we are not covering else
-    # istanbul ignore else
     {errors: [{}]}:
       {errors: [{error, stack}]} = obj_with_errors
 
@@ -33,14 +31,9 @@ handle_error = fn obj_with_errors:
 transform = fn source, filename:
   ast = parse source, filename
   handle_error ast
-  # TODO should loxia have it's own setting for source_map
-  # TODO or aslways generate them
   opts = dict:
     module_type: 'cjs'
-    generatorOpts: dict:
-      filename
-      sourceFileName: filename
-      sourceMaps: true
+    source_maps: true
 
   compiled = generate ast, filename, source, opts
   handle_error compiled
