@@ -1,45 +1,41 @@
-{describe: jest_describe, it: jest_it} = import '@jest/globals'
+{describe: jest_describe, it: jest_it, jest: jest_} = import '@jest/globals'
 {expect: jest_expect} = import '@jest/globals'
 
 
-skip = dict:
-  it: fn ...args:
-    jest_it.skip ...args
-
-  describe: fn descr, tests:
-    jest_describe.skip descr, fn:
-      tests()
+it_delegate = fn it: fn descr, test, timeout:
+  it
+    descr
+    fn ...args:
+      test ...args
       undefined
+    timeout
 
 
-only = dict:
-  it: fn ...args:
-    jest_it.only ...args
-
-  describe: fn descr, tests:
-    jest_describe.only descr, fn:
-      tests()
-      undefined
-
-
-describe = fn descr, tests:
-  jest_describe descr, fn:
-    tests()
+describe_delegate = fn describe: fn descr, tests:
+  describe descr, fn ...args:
+    tests ...args
     undefined
 
 
-it = fn descr, test, timeout:
-  jest_it descr, test, timeout
+describe = describe_delegate jest_describe
+it = it_delegate jest_it
+
+
+skip = dict:
+  describe: describe_delegate jest_describe.skip
+  it: it_delegate jest_it.skip
+
+
+only = dict:
+  describe: describe_delegate jest_describe.only
+  it: it_delegate jest_it.only
 
 
 any = jest_expect.any
 
+mock_fn = jest_.fn
 
-mock_fn = jest.fn
-
-mock = jest.mock
-
-mod = jest
+mock = jest_.mock
 
 
 to_equal = fn expected: fn expect_actual:

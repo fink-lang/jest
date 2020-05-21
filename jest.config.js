@@ -14,7 +14,7 @@ module.exports = {
 
   snapshotResolver: '<rootDir>/build/pkg/snapshot-resolver',
 
-  timers: 'fake',
+  timers: 'modern',
 
   clearMocks: true,
   resetMocks: false,
