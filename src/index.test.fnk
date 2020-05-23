@@ -27,7 +27,7 @@ only.describe 'test utils', fn:
 
 
   only.it 'tests mock funks', fn:
-    foo = mock_fn fn: null
+    foo = mock_fn fn: false
 
     expect
       foo
@@ -63,8 +63,8 @@ only.describe 'test utils', fn:
     foo = mock_fn
       # istanbul ignore next
       fn msg:
-        throw new Error msg
-        null
+        err = new Error msg
+        throw err
 
     expect
       fn: foo 'test'
@@ -75,10 +75,9 @@ only.describe 'test utils', fn:
       to_not_throw()
 
   skip.it 'skips',
-    # istanbul ignore next
-    fn:
-      throw new Error 'fail'
-      null
+    expect
+      true
+      to_equal false
 
 
 describe 'plain describe', fn:
