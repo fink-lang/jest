@@ -5,7 +5,7 @@ Object {
   "code": "const foo = 1234 || spam;
 exports.foo = foo;",
   "map": Object {
-    "mappings": "MAAA,G,GAAM,QAAQ,I;QAAd,G,GAAA,G",
+    "mappings": "AAAA,MAAA,GAAG,GAAG,QAAN,IAAA;QAAA,G,GAAA,G",
     "names": Array [],
     "sources": Array [
       "/temp/src/foobar.fnk",
@@ -23,7 +23,7 @@ Object {
   "code": "/* istanbul ignore next */
 function cov_2ozalsxixv() {
   var path = \\"/temp/src/foobar.fnk\\";
-  var hash = \\"c1ae8b6b7866b3f6bfb6c205e1257fdea0627f88\\";
+  var hash = \\"506f7272183f6ec5aca58b5b5dfb89dafa2b8156\\";
   var global = new Function(\\"return this\\")();
   var gcv = \\"__coverage__\\";
   var coverageData = {
@@ -98,11 +98,11 @@ function cov_2ozalsxixv() {
       version: 3,
       sources: [\\"/temp/src/foobar.fnk\\"],
       names: [],
-      mappings: \\"MAAA,G,GAAM,QAAQ,I;QAAd,G,GAAA,G\\",
+      mappings: \\"AAAA,MAAA,GAAG,GAAG,QAAQ,IAAd;QAAA,G,GAAA,G\\",
       sourcesContent: [\\"foo = 1234 or spam\\"]
     },
     _coverageSchema: \\"1a1c01bbd47fc00a2c39e90264f33305004495a9\\",
-    hash: \\"c1ae8b6b7866b3f6bfb6c205e1257fdea0627f88\\"
+    hash: \\"506f7272183f6ec5aca58b5b5dfb89dafa2b8156\\"
   };
   var coverage = global[gcv] || (global[gcv] = {});
 
@@ -133,7 +133,7 @@ const foo =
 cov_2ozalsxixv().s[1]++;
 exports.foo = foo;",
   "map": Object {
-    "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;MAAA,G;;;AAAM;AAAA;AAAA;AAAA,6BAAQ,IAAR,C;;;;QAAN,G,GAAA,G",
+    "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA,MAAA,GAAG;AAAA;AAAA;AAAG;AAAA;AAAA;AAAA,6BAAN,IAAM,CAAH,CAAH;;;;QAAA,G,GAAA,G",
     "names": Array [],
     "sources": Array [
       "/temp/src/foobar.fnk",
