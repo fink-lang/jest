@@ -1,5 +1,5 @@
-{process} = import './transform'
 {describe, it, expect, to_match_snapshot, to_throw} = import '.'
+{process} = import './transform'
 
 
 describe process, fn:

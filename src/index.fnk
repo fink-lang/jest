@@ -2,19 +2,22 @@
 {expect: jest_expect} = import '@jest/globals'
 
 
+[no_result] = []
+
+
 it_delegate = fn it: fn descr, test, timeout:
   it
     descr
     fn ...args:
-      test ...args
-      undefined
+      await test ...args
+      no_result
     timeout
 
 
 describe_delegate = fn describe: fn descr, tests:
   describe descr, fn ...args:
     tests ...args
-    undefined
+    no_result
 
 
 describe = describe_delegate jest_describe
