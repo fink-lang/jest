@@ -27,6 +27,55 @@ describe process, fn:
       to_match_snapshot
 
 
+  it 'transforms mock imported from @fink/jest as jest.mock', fn:
+    {code, map} = process
+      `
+        {it, mock, mock_fn} = import '@fink/jest'
+
+        mock './transform.fnk', fn: dict:
+          foobar: mock_fn _
+
+        foo = fn mock:
+          mock 'not jest.mock'
+      `
+      '/temp/src/foobar.fnk'
+      {rootDir: '/temp/src'}
+
+    expect
+      {code, map}
+      to_match_snapshot
+
+
+  it 'ignores transforming mock not imported from @fink/jest', fn:
+    {code, map} = process
+      `
+        {mock} = import './foobar.fnk'
+
+        mock 'not a jest mock'
+      `
+      '/temp/src/foobar.fnk'
+      {rootDir: '/temp/src'}
+
+    expect
+      {code, map}
+      to_match_snapshot
+
+
+  it 'ignores transforming mock not imported', fn:
+    {code, map} = process
+      `
+        {mock} = spam 'ni'
+
+        mock 'not a jest mock'
+      `
+      '/temp/src/foobar.fnk'
+      {rootDir: '/temp/src'}
+
+    expect
+      {code, map}
+      to_match_snapshot
+
+
   it 'handles larix errors', fn:
     expect
       fn: process '123 foo', 'foobar.fnk', {rootDir: './src'}
