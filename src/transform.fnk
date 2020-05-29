@@ -1,9 +1,13 @@
 {transformSync: babel_transform} = import '@babel/core'
+{identifier, memberExpression} = import '@babel/types'
+
 {parse} = import '@fink/larix'
 {generate} = import '@fink/loxia'
 {set_props} = import '@fink/std-lib/obj'
 
 babel_istanbul = import 'babel-plugin-istanbul'
+
+[no_result] = []
 
 
 istanbul_plugin = fn cwd, input_source_map:
@@ -14,6 +18,47 @@ istanbul_plugin = fn cwd, input_source_map:
       include: ['**/*.fnk']
       extension: '.fnk'
       inputSourceMap: input_source_map
+
+
+module_scope = fn scope:
+  match scope:
+    {parent: {}}: module_scope scope.parent
+    else: scope
+
+
+is_import_from_fink_jest = fn init:
+  match init:
+   {callee: {name: 'require'}, arguments: [{value: '@fink/jest'}]}:
+      true
+    else:
+      false
+
+
+is_imported_mock = fn mock:
+  {bindings} = module_scope mock.scope
+  match bindings.mock:
+    {referencePaths: not ?.includes mock}:
+      false
+    {path: {node: {init: is_import_from_fink_jest ?}}}:
+      true
+    else: false
+
+
+mock_plugin = fn:
+  dict:
+    visitor: dict:
+      CallExpression: fn path:
+        callee = path.get 'callee'
+        match callee:
+          {node: {name: ? != 'mock'}}:
+            false
+
+          is_imported_mock ?:
+            callee.replaceWith
+              memberExpression
+                identifier 'jest'
+                identifier 'mock'
+        no_result
 
 
 handle_error = fn obj_with_errors:
@@ -44,9 +89,10 @@ process = fn src, filename, {rootDir}, transform_opts:
 
   plugins = match transform_opts:
     {instrument: true}:
-      [istanbul_plugin rootDir, source_map]
+      [mock_plugin, istanbul_plugin rootDir, source_map]
     else:
-      []
+      [mock_plugin]
+
 
   opts = dict:
     filename
@@ -57,5 +103,6 @@ process = fn src, filename, {rootDir}, transform_opts:
 
   # TODO can we use transformFromAstSync with ast from loxia
   # TODO instead of having to reparse generated js
-  babel_transform js_code, opts
+  foo = babel_transform js_code, opts
+  foo
 

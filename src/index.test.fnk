@@ -11,6 +11,7 @@ mock '@fink/test'
     test: mock_test
   {virtual: true}
 
+
 {test} = import '@fink/test'
 
 
@@ -26,7 +27,7 @@ only.describe 'test utils', fn:
       to_not_equal 'spam'
 
 
-  only.it 'tests mock funks', fn:
+  only.it 'tests mock funcs', fn:
     foo = mock_fn fn: false
 
     expect
@@ -52,7 +53,7 @@ only.describe 'test utils', fn:
       was_called_with 'bar'
 
 
-  only.it 'test mock module', fn:
+  only.it 'test mock module virtual', fn:
     test 'testing'
     expect
       mock_test
@@ -72,7 +73,7 @@ only.describe 'test utils', fn:
 
     expect
       fn: 'test'
-      to_not_throw()
+      to_not_throw ()
 
   skip.it 'skips',
     expect
