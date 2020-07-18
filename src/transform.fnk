@@ -4,6 +4,8 @@
 {parse} = import '@fink/larix'
 {generate} = import '@fink/loxia'
 {set_props, new} = import '@fink/js-interop/reflect'
+{SyntaxError} = import '@fink/js-interop/globals'
+
 
 babel_istanbul = import 'babel-plugin-istanbul'
 

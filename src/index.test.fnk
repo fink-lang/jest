@@ -1,5 +1,8 @@
 {new} = import '@fink/js-interop/reflect'
 
+{String, Number, Error} = import '@fink/js-interop/globals'
+
+
 {skip, only, describe, it, expect, any, mock, mock_fn} = import '.'
 {to_equal, to_not_equal} = import '.'
 {was_called, was_not_called, was_called_with, was_not_called_with} = import '.'

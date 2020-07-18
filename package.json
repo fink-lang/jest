@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.10.5",
-    "@fink/js-interop": "^1.0.0",
+    "@fink/js-interop": "^1.1.0",
     "@fink/std-lib": "^3.0.0"
   }
 }
