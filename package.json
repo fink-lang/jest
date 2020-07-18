@@ -37,17 +37,18 @@
     "@fink/loxia": ">=8.0.1"
   },
   "devDependencies": {
-    "@fink/cli": "^6.0.0",
-    "@fink/larix": "^10.0.0",
-    "@fink/loxia": "^10.0.0",
+    "@fink/cli": "^6.1.0",
+    "@fink/larix": "^12.0.0",
+    "@fink/loxia": "^12.0.0",
     "commitizen": "^4.1.2",
     "cz-conventional-changelog": "^3.2.0",
-    "jest-cli": "^26.0.0",
+    "jest-cli": "^26.1.0",
     "npx-run": "^2.1.2",
-    "semantic-release": "^17.0.8"
+    "semantic-release": "^17.1.1"
   },
   "dependencies": {
-    "@babel/core": "^7.9.0",
-    "@fink/std-lib": "^2.0.0"
+    "@babel/core": "^7.10.5",
+    "@fink/js-interop": "^1.1.0",
+    "@fink/std-lib": "^3.0.0"
   }
 }

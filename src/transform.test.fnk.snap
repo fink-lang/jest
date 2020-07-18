@@ -172,20 +172,23 @@ mock 'not a jest mock'
 exports[`process ignores transforming mock not imported from @fink/jest 1`] = `
 Object {
   "code": "const {
-  mock
+  mock,
+  require_actual
 } = require(\\"./foobar.fnk\\");
 
-mock(\`not a jest mock\`);",
+mock(\`not a jest mock\`);
+require_actual(\`not a module\`);",
   "map": Object {
-    "mappings": ";AAAC,EAAA;YAAe,c;;AAEhB,IAAI,CAAJ,iBAAI,CAAJ",
+    "mappings": ";AAAC,EAAA,I;AAAM,EAAA;YAAyB,c;;AAEhC,IAAI,CAAJ,iBAAI,CAAJ;AACA,cAAc,CAAd,cAAc,CAAd",
     "names": Array [],
     "sources": Array [
       "/temp/src/foobar.fnk",
     ],
     "sourcesContent": Array [
-      "{mock} = import './foobar.fnk'
+      "{mock, require_actual} = import './foobar.fnk'
 
 mock 'not a jest mock'
+require_actual 'not a module'
 ",
     ],
     "version": 3,
@@ -198,28 +201,33 @@ Object {
   "code": "const {
   it,
   mock,
-  mock_fn
+  mock_fn,
+  require_actual
 } = require(\\"@fink/jest\\");
 
 /* istanbul ignore next */
 jest.mock(\`./transform.fnk\`, () => ({
-  \\"foobar\\": mock_fn()
+  \\"foobar\\": mock_fn(),
+  \\"shrub\\":
+  /* istanbul ignore next */
+  jest.requireActual(\`./transform\`)
 }));
 
 const foo = mock => mock(\`not jest.mock\`);
 
 exports.foo = foo;",
   "map": Object {
-    "mappings": ";AAAC,EAAA,E;AAAI,EAAA,I;AAAM,EAAA;YAAkB,Y;;AAE7B;AAAA,UAAI,iBAAJ,EAAwB,OAAI;AAC1B,YAAQ,OAAO;AADW,CAAJ,CAAxB;;AAGA,MAAA,GAAG,GAAG,IAAA,IACJ,IAAI,CADN,eACM,CADN;;QAAA,G,GAAA,G",
+    "mappings": ";AAAC,EAAA,E;AAAI,EAAA,I;AAAM,EAAA,O;AAAS,EAAA;YAAyB,Y;;AAE7C;AAAA,UAAI,iBAAJ,EAAwB,OAAI;AAC1B,YAAQ,OADkB,EAAA;AAE1B;AAAO;AAAA,qBAAc,aAAd;AAFmB,CAAJ,CAAxB;;AAIA,MAAA,GAAG,GAAG,IAAA,IACJ,IAAI,CADN,eACM,CADN;;QAAA,G,GAAA,G",
     "names": Array [],
     "sources": Array [
       "/temp/src/foobar.fnk",
     ],
     "sourcesContent": Array [
-      "{it, mock, mock_fn} = import '@fink/jest'
+      "{it, mock, mock_fn, require_actual} = import '@fink/jest'
 
 mock './transform.fnk', fn: dict:
   foobar: mock_fn _
+  shrub: require_actual './transform'
 
 foo = fn mock:
   mock 'not jest.mock'

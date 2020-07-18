@@ -40,6 +40,8 @@ mock_fn = jest_.fn
 
 mock = jest_.mock
 
+require_actual = jest_.require_actual
+
 
 to_equal = fn expected: fn expect_actual:
   expect_actual.toEqual expected
