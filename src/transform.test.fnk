@@ -29,15 +29,16 @@ describe process, fn:
 
   it 'transforms mock imported from @fink/jest as jest.mock', fn:
     {code, map} = process
-      `
-        {it, mock, mock_fn} = import '@fink/jest'
+      "
+        {it, mock, mock_fn, require_actual} = import '@fink/jest'
 
         mock './transform.fnk', fn: dict:
           foobar: mock_fn _
+          shrub: require_actual './transform'
 
         foo = fn mock:
           mock 'not jest.mock'
-      `
+      "
       '/temp/src/foobar.fnk'
       {rootDir: '/temp/src'}
 
@@ -48,11 +49,12 @@ describe process, fn:
 
   it 'ignores transforming mock not imported from @fink/jest', fn:
     {code, map} = process
-      `
-        {mock} = import './foobar.fnk'
+      "
+        {mock, require_actual} = import './foobar.fnk'
 
         mock 'not a jest mock'
-      `
+        require_actual 'not a module'
+      "
       '/temp/src/foobar.fnk'
       {rootDir: '/temp/src'}
 
@@ -63,11 +65,11 @@ describe process, fn:
 
   it 'ignores transforming mock not imported', fn:
     {code, map} = process
-      `
+      "
         {mock} = spam 'ni'
 
         mock 'not a jest mock'
-      `
+      "
       '/temp/src/foobar.fnk'
       {rootDir: '/temp/src'}
 
@@ -90,9 +92,9 @@ describe process, fn:
   it 'handles loxia errors', fn:
     expect
       fn: process '123 = foo', 'foobar.fnk', {rootDir: './src'}
-      to_throw `
+      to_throw "
         foobar.fnk:1:0
         1| 123 = foo
            ^
 
-        Unable to transform 'assign ='`
+        Unable to transform 'assign ='"

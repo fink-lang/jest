@@ -3,7 +3,7 @@
 
 {parse} = import '@fink/larix'
 {generate} = import '@fink/loxia'
-{set_props} = import '@fink/std-lib/obj'
+{set_props, new} = import '@fink/js-interop/reflect'
 
 babel_istanbul = import 'babel-plugin-istanbul'
 
@@ -34,14 +34,15 @@ is_import_from_fink_jest = fn init:
       false
 
 
-is_imported_mock = fn mock:
-  {bindings} = module_scope mock.scope
-  match bindings.mock:
-    {referencePaths: not ?.includes mock}:
+is_imported = fn ident, name:
+  {bindings} = module_scope ident.scope
+  match bindings.(name):
+    {referencePaths: not ?.includes ident}:
       false
     {path: {node: {init: is_import_from_fink_jest ?}}}:
       true
-    else: false
+    else:
+      false
 
 
 mock_plugin = fn:
@@ -53,7 +54,7 @@ mock_plugin = fn:
           {node: {name: ? != 'mock'}}:
             false
 
-          is_imported_mock ?:
+          is_imported ?, 'mock':
             callee.replaceWith
               memberExpression
                 identifier 'jest'
@@ -61,12 +62,30 @@ mock_plugin = fn:
         no_result
 
 
+require_actual_plugin = fn:
+  dict:
+    visitor: dict:
+      CallExpression: fn path:
+        callee = path.get 'callee'
+        match callee:
+          {node: {name: ? != 'require_actual'}}:
+            false
+
+          is_imported ?, 'require_actual':
+            callee.replaceWith
+              memberExpression
+                identifier 'jest'
+                identifier 'requireActual'
+        no_result
+
+
+
 handle_error = fn obj_with_errors:
   match obj_with_errors:
     {errors: [{}]}:
       {errors: [{error, stack}]} = obj_with_errors
 
-      err = new SyntaxError error
+      err = new SyntaxError, error
       set_props err, {stack: '${error}${stack}'}
       throw err
     else:
@@ -89,9 +108,9 @@ process = fn src, filename, {rootDir}, transform_opts:
 
   plugins = match transform_opts:
     {instrument: true}:
-      [mock_plugin, istanbul_plugin rootDir, source_map]
+      [mock_plugin, require_actual_plugin, istanbul_plugin rootDir, source_map]
     else:
-      [mock_plugin]
+      [mock_plugin, require_actual_plugin]
 
 
   opts = dict:
