@@ -40,6 +40,8 @@ mock_fn = jest_.fn
 
 mock = jest_.mock
 
+spy_on = jest_.spyOn
+
 require_actual = jest_.require_actual
 
 
@@ -50,8 +52,10 @@ to_not_equal = fn expected: fn expect_actual:
   expect_actual.not.toEqual expected
 
 
+
 to_match_snapshot = fn expect_actual:
   expect_actual.toMatchSnapshot ()
+
 
 
 was_called = fn expect_actual:
@@ -61,6 +65,7 @@ was_not_called = fn expect_actual:
   expect_actual.not.toBeCalled ()
 
 
+
 was_called_with = fn ...expected: fn expect_actual:
   expect_actual.toHaveBeenCalledWith ...expected
 
@@ -68,11 +73,21 @@ was_not_called_with = fn ...expected: fn expect_actual:
   expect_actual.not.toHaveBeenCalledWith ...expected
 
 
+
+was_last_called_with = fn ...expected: fn expect_actual:
+  expect_actual.toHaveBeenLastCalledWith ...expected
+
+was_not_last_called_with = fn ...expected: fn expect_actual:
+  expect_actual.not.toHaveBeenLastCalledWith ...expected
+
+
+
 to_throw = fn expected: fn expect_actual:
   expect_actual.toThrow expected
 
 to_not_throw = fn expected: fn expect_actual:
   expect_actual.not.toThrow expected
+
 
 
 expect = fn actual, expectation:

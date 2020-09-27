@@ -3,9 +3,10 @@
 {String, Number, Error} = import '@fink/js-interop/globals'
 
 
-{skip, only, describe, it, expect, any, mock, mock_fn} = import '.'
+{skip, only, describe, it, expect, any, mock, mock_fn, spy_on} = import '.'
 {to_equal, to_not_equal} = import '.'
 {was_called, was_not_called, was_called_with, was_not_called_with} = import '.'
+{was_last_called_with, was_not_last_called_with} = import '.'
 {to_throw, to_not_throw} = import '.'
 
 
@@ -40,6 +41,7 @@ only.describe 'test utils', fn:
       was_not_called
 
     foo 'bar'
+    foo 'ni'
 
     expect
       foo
@@ -57,12 +59,34 @@ only.describe 'test utils', fn:
       foo
       was_called_with 'bar'
 
+    expect
+      foo
+      was_last_called_with 'ni'
+
+    expect
+      foo
+      was_not_last_called_with 'bar'
+
 
   only.it 'test mock module virtual', fn:
     test 'testing'
     expect
       mock_test
       was_called_with 'testing'
+
+
+  only.it 'spies on obj funcs', fn:
+    obj = {foo: fn: 'bar'}
+    spy = spy_on obj , 'foo'
+
+    expect
+      obj.foo _
+      to_equal 'bar'
+
+    expect
+      spy
+      was_called
+
 
 
   only.it 'tests exceptions', fn:
@@ -84,6 +108,7 @@ only.describe 'test utils', fn:
     expect
       true
       to_equal false
+
 
 
 describe 'plain describe', fn:
