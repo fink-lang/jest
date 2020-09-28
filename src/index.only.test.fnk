@@ -1,0 +1,25 @@
+{only, describe, it, expect} = import '.'
+{to_equal} = import '.'
+
+
+
+only.describe 'only describe', fn:
+  only.it 'only.it', fn:
+    expect
+      'foo'
+      to_equal 'foo'
+
+
+  it 'ignored it', fn:
+    expect
+      'foo'
+      to_equal 'bar'
+
+
+
+describe 'ignored describe', fn:
+  it 'ignored it', fn:
+    expect
+      'foo'
+      to_equal 'bar'
+

@@ -1,9 +1,10 @@
 {new} = import '@fink/js-interop/reflect'
+{Promise, setTimeout} = import '@fink/js-interop/globals'
 
 {String, Number, Error} = import '@fink/js-interop/globals'
 
 
-{skip, only, describe, it, expect, any, mock, mock_fn, spy_on} = import '.'
+{describe, it, expect, any, mock, mock_fn, spy_on, run_all_timers} = import '.'
 {to_equal, to_not_equal} = import '.'
 {was_called, was_not_called, was_called_with, was_not_called_with} = import '.'
 {was_last_called_with, was_not_last_called_with} = import '.'
@@ -21,9 +22,9 @@ mock '@fink/test'
 {test} = import '@fink/test'
 
 
-only.describe 'test utils', fn:
+describe 'test utils', fn:
 
-  only.it 'equality', fn:
+  it 'equality', fn:
     expect
       'foobar'
       to_equal 'foobar'
@@ -33,7 +34,7 @@ only.describe 'test utils', fn:
       to_not_equal 'spam'
 
 
-  only.it 'tests mock funcs', fn:
+  it 'tests mock funcs', fn:
     foo = mock_fn fn: false
 
     expect
@@ -68,14 +69,14 @@ only.describe 'test utils', fn:
       was_not_last_called_with 'bar'
 
 
-  only.it 'test mock module virtual', fn:
+  it 'test mock module virtual', fn:
     test 'testing'
     expect
       mock_test
       was_called_with 'testing'
 
 
-  only.it 'spies on obj funcs', fn:
+  it 'spies on obj funcs', fn:
     obj = {foo: fn: 'bar'}
     spy = spy_on obj , 'foo'
 
@@ -89,7 +90,7 @@ only.describe 'test utils', fn:
 
 
 
-  only.it 'tests exceptions', fn:
+  it 'tests exceptions', fn:
     foo = mock_fn
       # istanbul ignore next
       fn msg:
@@ -104,19 +105,17 @@ only.describe 'test utils', fn:
       fn: 'test'
       to_not_throw ()
 
-  skip.it 'skips',
+
+  it 'runs timers', fn:
+    # TODO: use std-lib/async sleep
+    task = new Promise, fn resolve:
+      setTimeout fn: resolve 'done'
+      123456789
+
+    run_all_timers _
+
     expect
-      true
-      to_equal false
+      await task
+      to_equal 'done'
 
 
-
-describe 'plain describe', fn:
-  it 'ignores return value', fn:
-    'foo'
-
-  'ignored too'
-
-
-skip.describe 'test utils', fn:
-  'foo'

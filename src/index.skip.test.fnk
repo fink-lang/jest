@@ -1,0 +1,24 @@
+{skip, describe, it, expect, to_equal} = import '.'
+
+
+
+describe 'describe', fn:
+  it 'it', fn:
+    expect
+      'foo'
+      to_equal 'foo'
+
+
+  skip.it 'ignored it', fn:
+    expect
+      'foo'
+      to_equal 'bar'
+
+
+
+skip.describe 'ignored describe', fn:
+  it 'ignored it', fn:
+    expect
+      'foo'
+      to_equal 'bar'
+

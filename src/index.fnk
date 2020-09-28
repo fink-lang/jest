@@ -89,6 +89,8 @@ to_not_throw = fn expected: fn expect_actual:
   expect_actual.not.toThrow expected
 
 
+run_all_timers = jest_.runAllTimers
+
 
 expect = fn actual, expectation:
   expectation jest_expect actual
