@@ -203,7 +203,7 @@ Object {
   mock,
   mock_fn,
   require_actual
-} = require(\\"@fink/jest\\");
+} = require(\\"@fink/jest/test.js\\");
 
 /* istanbul ignore next */
 jest.mock(\`./transform.fnk\`, () => ({
@@ -217,13 +217,13 @@ const foo = mock => mock(\`not jest.mock\`);
 
 exports.foo = foo;",
   "map": Object {
-    "mappings": ";AAAC,EAAA,E;AAAI,EAAA,I;AAAM,EAAA,O;AAAS,EAAA;YAAyB,Y;;AAE7C;AAAA,UAAI,iBAAJ,EAAwB,OAAI;AAC1B,YAAQ,OADkB,EAAA;AAE1B;AAAO;AAAA,qBAAc,aAAd;AAFmB,CAAJ,CAAxB;;AAIA,MAAA,GAAG,GAAG,IAAA,IACJ,IAAI,CADN,eACM,CADN;;QAAA,G,GAAA,G",
+    "mappings": ";AAAC,EAAA,E;AAAI,EAAA,I;AAAM,EAAA,O;AAAS,EAAA;YAAyB,oB;;AAE7C;AAAA,UAAI,iBAAJ,EAAwB,OAAI;AAC1B,YAAQ,OADkB,EAAA;AAE1B;AAAO;AAAA,qBAAc,aAAd;AAFmB,CAAJ,CAAxB;;AAIA,MAAA,GAAG,GAAG,IAAA,IACJ,IAAI,CADN,eACM,CADN;;QAAA,G,GAAA,G",
     "names": Array [],
     "sources": Array [
       "/temp/src/foobar.fnk",
     ],
     "sourcesContent": Array [
-      "{it, mock, mock_fn, require_actual} = import '@fink/jest'
+      "{it, mock, mock_fn, require_actual} = import '@fink/jest/test.fnk'
 
 mock './transform.fnk', fn: dict:
   foobar: mock_fn _
