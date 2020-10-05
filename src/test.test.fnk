@@ -4,11 +4,11 @@
 {String, Number, Error} = import '@fink/js-interop/globals'
 
 
-{describe, it, expect, any, mock, mock_fn, spy_on, run_all_timers} = import '.'
-{to_equal, to_not_equal} = import '.'
-{was_called, was_not_called, was_called_with, was_not_called_with} = import '.'
-{was_last_called_with, was_not_last_called_with} = import '.'
-{to_throw, to_not_throw} = import '.'
+{describe, it, expect, any, mock, mock_fn, spy_on, run_all_timers} = import './test.fnk'
+{to_equal, to_not_equal} = import './test.fnk'
+{was_called, was_not_called, was_called_with, was_not_called_with} = import './test.fnk'
+{was_last_called_with, was_not_last_called_with} = import './test.fnk'
+{to_throw, to_not_throw} = import './test.fnk'
 
 
 mock_test = mock_fn fn: 'testing'

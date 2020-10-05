@@ -1,5 +1,5 @@
-{describe, it, expect, to_equal} = import '.'
-{resolveSnapshotPath, resolveTestPath} = import './snapshot-resolver'
+{describe, it, expect, to_equal} = import './test.fnk'
+{resolveSnapshotPath, resolveTestPath} = import './snapshot-resolver.fnk'
 
 
 describe 'snapshot-resolver', fn:
