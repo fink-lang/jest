@@ -1,4 +1,4 @@
-{skip, describe, it, expect, to_equal} = import '.'
+{skip, describe, it, expect, to_equal} = import './test.fnk'
 
 
 

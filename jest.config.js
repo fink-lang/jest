@@ -1,9 +1,9 @@
 
-module.exports = {
+export default {
   testEnvironment: 'node',
   setupFiles: [],
   moduleFileExtensions: ['js', 'fnk'],
-  transform: {'^.+\\.fnk$': ['<rootDir>/build/pkg/transform.js']},
+  transform: {'^.+\\.fnk$': ['<rootDir>/build/pkg/cjs/transform.js']},
   transformIgnorePatterns: ['.+/node_modules/', '<rootDir>/build/'],
 
   modulePathIgnorePatterns: ['<rootDir>/build/'],
@@ -12,7 +12,8 @@ module.exports = {
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/build/'],
   watchPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/build/'],
 
-  snapshotResolver: '<rootDir>/build/pkg/snapshot-resolver',
+  resolver: '<rootDir>/build/pkg/cjs/module-resolver.js',
+  snapshotResolver: '<rootDir>/build/pkg/cjs/snapshot-resolver.js',
 
   timers: 'modern',
 

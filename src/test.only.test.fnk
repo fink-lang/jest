@@ -1,5 +1,5 @@
-{only, describe, it, expect} = import '.'
-{to_equal} = import '.'
+{only, describe, it, expect} = import './test.fnk'
+{to_equal} = import './test.fnk'
 
 
 
