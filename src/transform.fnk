@@ -3,6 +3,7 @@
 
 {parse} = import '@fink/larix'
 {generate} = import '@fink/loxia'
+{starts_with} = import '@fink/std-lib/str'
 {set_props, new} = import '@fink/js-interop/reflect'
 {SyntaxError} = import '@fink/js-interop/globals'
 
@@ -30,7 +31,7 @@ module_scope = fn scope:
 
 is_import_from_fink_jest = fn init:
   match init:
-   {callee: {name: 'require'}, arguments: [{value: '@fink/jest'}]}:
+   {callee: {name: 'require'}, arguments: [{value: starts_with ?, '@fink/jest/'}]}:
       true
     else:
       false

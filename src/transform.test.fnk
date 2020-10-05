@@ -30,7 +30,7 @@ describe process, fn:
   it 'transforms mock imported from @fink/jest as jest.mock', fn:
     {code, map} = process
       "
-        {it, mock, mock_fn, require_actual} = import '@fink/jest'
+        {it, mock, mock_fn, require_actual} = import '@fink/jest/test.fnk'
 
         mock './transform.fnk', fn: dict:
           foobar: mock_fn _
