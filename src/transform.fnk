@@ -1,11 +1,11 @@
 {transformSync: babel_transform} = import '@babel/core'
 {identifier, memberExpression} = import '@babel/types'
 
-{parse} = import '@fink/larix'
-{generate} = import '@fink/loxia'
-{starts_with} = import '@fink/std-lib/str'
-{set_props, new} = import '@fink/js-interop/reflect'
-{SyntaxError} = import '@fink/js-interop/globals'
+{parse} = import '@fink/larix/parser.fnk'
+{generate} = import '@fink/loxia/generate.fnk'
+{starts_with} = import '@fink/std-lib/str.fnk'
+{set_props, new} = import '@fink/js-interop/reflect.fnk'
+{SyntaxError} = import '@fink/js-interop/globals.fnk'
 
 
 babel_istanbul = import 'babel-plugin-istanbul'

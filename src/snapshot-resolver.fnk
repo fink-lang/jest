@@ -1,5 +1,5 @@
-{length} = import '@fink/std-lib/iter'
-{slice} = import '@fink/std-lib/str'
+{length} = import '@fink/std-lib/iter.fnk'
+{slice} = import '@fink/std-lib/str.fnk'
 
 
 resolveSnapshotPath = fn test_path, snapshot_ext:
