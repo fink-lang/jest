@@ -1,17 +1,18 @@
-{new} = import '@fink/js-interop/reflect'
-{Promise, setTimeout} = import '@fink/js-interop/globals'
+{new} = import '@fink/js-interop/reflect.fnk'
+{Promise, setTimeout} = import '@fink/js-interop/globals.fnk'
+{String, Number, Error} = import '@fink/js-interop/globals.fnk'
 
-{String, Number, Error} = import '@fink/js-interop/globals'
 
-
-{describe, it, expect, any, mock, mock_fn, spy_on, run_all_timers} = import './test.fnk'
-{to_equal, to_not_equal} = import './test.fnk'
+{describe, it, expect, any, mock, mock_fn, spy_on} = import './test.fnk'
+{run_all_timers, to_equal, to_not_equal} = import './test.fnk'
 {was_called, was_not_called, was_called_with, was_not_called_with} = import './test.fnk'
 {was_last_called_with, was_not_last_called_with} = import './test.fnk'
 {to_throw, to_not_throw} = import './test.fnk'
 
 
+
 mock_test = mock_fn fn: 'testing'
+
 
 mock '@fink/test'
   fn: dict:
@@ -19,7 +20,9 @@ mock '@fink/test'
   {virtual: true}
 
 
+
 {test} = import '@fink/test'
+
 
 
 describe 'test utils', fn:
