@@ -3,6 +3,7 @@ export default {
   testEnvironment: 'node',
   setupFiles: [],
   moduleFileExtensions: ['js', 'fnk'],
+
   transform: {'^.+\\.fnk$': ['<rootDir>/build/pkg/cjs/transform.js']},
   transformIgnorePatterns: ['.+/node_modules/', '<rootDir>/build/'],
 
