@@ -82,12 +82,12 @@ describe process, fn:
   it 'handles larix errors', fn:
     expect
       fn: process '123 foo', 'foobar.fnk', {rootDir: './src'}
-      to_throw '
+      to_throw "
         foobar.fnk:1:4
         1| 123 foo
                ^
 
-        Expected ',' or indented new line or Symbol(end).'
+        Expected ',' or indented new line or end of code"
 
 
   it 'handles loxia errors', fn:
