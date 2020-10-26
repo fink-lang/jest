@@ -1,6 +1,7 @@
 {new} = import '@fink/js-interop/reflect.fnk'
 {Promise, setTimeout} = import '@fink/js-interop/globals.fnk'
-{String, Number, Error} = import '@fink/js-interop/globals.fnk'
+{String, Number} = import '@fink/js-interop/globals.fnk'
+{error} = import '@fink/std-lib/error.fnk'
 
 
 {describe, it, expect, any, mock, mock_fn, spy_on} = import './test.fnk'
@@ -97,7 +98,7 @@ describe 'test utils', fn:
     foo = mock_fn
       # istanbul ignore next
       fn msg:
-        err = new Error, msg
+        err = error msg
         throw err
 
     expect
