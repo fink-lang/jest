@@ -4,8 +4,7 @@
 {parse} = import '@fink/larix/parser.fnk'
 {generate} = import '@fink/loxia/generate.fnk'
 {starts_with} = import '@fink/std-lib/str.fnk'
-{set_props, new} = import '@fink/js-interop/reflect.fnk'
-{SyntaxError} = import '@fink/js-interop/globals.fnk'
+{error, is_error} = import '@fink/std-lib/error.fnk'
 
 
 babel_istanbul = import 'babel-plugin-istanbul'
@@ -86,11 +85,12 @@ require_actual_plugin = fn:
 handle_error = fn obj_with_errors:
   match obj_with_errors:
     {errors: [{}]}:
-      {errors: [{error, stack}]} = obj_with_errors
-
-      err = new SyntaxError, error
-      set_props err, {stack: '${error}${stack}'}
-      throw err
+      {errors: [err]} = obj_with_errors
+      match err:
+        is_error ?:
+          throw err
+        else:
+          throw error err.error, {stack: err.stack}
     else:
       obj_with_errors
 
