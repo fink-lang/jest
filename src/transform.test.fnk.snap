@@ -149,11 +149,11 @@ exports.foo = foo;",
 exports[`process ignores transforming mock not imported 1`] = `
 Object {
   "code": "const {
-  \\"mock\\": mock
+  mock
 } = spam(\`ni\`);
 mock(\`not a jest mock\`);",
   "map": Object {
-    "mappings": "AAAA,MAAA;AAAC,UAAA;AAAD,IAAS,IAAI,CAAb,IAAa,CAAb;AAEA,IAAI,CAAJ,iBAAI,CAAJ",
+    "mappings": "AAAA,MAAA;AAAC,EAAA;AAAD,IAAS,IAAI,CAAb,IAAa,CAAb;AAEA,IAAI,CAAJ,iBAAI,CAAJ",
     "names": Array [],
     "sources": Array [
       "/temp/src/foobar.fnk",
@@ -207,8 +207,8 @@ Object {
 
 /* istanbul ignore next */
 jest.mock(\`./transform.fnk\`, () => ({
-  \\"foobar\\": mock_fn(),
-  \\"shrub\\":
+  foobar: mock_fn(),
+  shrub:
   /* istanbul ignore next */
   jest.requireActual(\`./transform\`)
 }));
@@ -217,7 +217,7 @@ const foo = mock => mock(\`not jest.mock\`);
 
 exports.foo = foo;",
   "map": Object {
-    "mappings": ";AAAC,EAAA,E;AAAI,EAAA,I;AAAM,EAAA,O;AAAS,EAAA;YAAyB,oB;;AAE7C;AAAA,UAAI,iBAAJ,EAAwB,OAAI;AAC1B,YAAQ,OADkB,EAAA;AAE1B;AAAO;AAAA,qBAAc,aAAd;AAFmB,CAAJ,CAAxB;;AAIA,MAAA,GAAG,GAAG,IAAA,IACJ,IAAI,CADN,eACM,CADN;;QAAA,G,GAAA,G",
+    "mappings": ";AAAC,EAAA,E;AAAI,EAAA,I;AAAM,EAAA,O;AAAS,EAAA;YAAyB,oB;;AAE7C;AAAA,UAAI,iBAAJ,EAAwB,OAAI;AAC1B,EAAA,MAAA,EAAQ,OADkB,EAAA;AAE1B,EAAA,KAAA;AAAO;AAAA,qBAAc,aAAd;AAFmB,CAAJ,CAAxB;;AAIA,MAAA,GAAG,GAAG,IAAA,IACJ,IAAI,CADN,eACM,CADN;;QAAA,G,GAAA,G",
     "names": Array [],
     "sources": Array [
       "/temp/src/foobar.fnk",
