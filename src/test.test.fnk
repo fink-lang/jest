@@ -16,7 +16,7 @@ mock_test = mock_fn fn: 'testing'
 
 
 mock '@fink/test'
-  fn: dict:
+  fn: rec:
     test: mock_test
   {virtual: true}
 

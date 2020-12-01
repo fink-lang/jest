@@ -24,12 +24,12 @@ describe = describe_delegate jest_describe
 it = it_delegate jest_it
 
 
-skip = dict:
+skip = rec:
   describe: describe_delegate jest_describe.skip
   it: it_delegate jest_it.skip
 
 
-only = dict:
+only = rec:
   describe: describe_delegate jest_describe.only
   it: it_delegate jest_it.only
 
