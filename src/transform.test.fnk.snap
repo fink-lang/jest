@@ -225,7 +225,7 @@ exports.foo = foo;",
     "sourcesContent": Array [
       "{it, mock, mock_fn, require_actual} = import '@fink/jest/test.fnk'
 
-mock './transform.fnk', fn: dict:
+mock './transform.fnk', fn: rec:
   foobar: mock_fn _
   shrub: require_actual './transform'
 

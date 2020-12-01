@@ -33,7 +33,7 @@ describe process, fn:
       "
         {it, mock, mock_fn, require_actual} = import '@fink/jest/test.fnk'
 
-        mock './transform.fnk', fn: dict:
+        mock './transform.fnk', fn: rec:
           foobar: mock_fn _
           shrub: require_actual './transform'
 
@@ -87,7 +87,7 @@ describe process, fn:
         1| 123 foo
                ^
 
-        Expected `,` or indented new line or end of code."
+        Expected `,` or indented new line or end."
 
 
   it 'handles loxia errors', fn:
