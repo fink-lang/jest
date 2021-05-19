@@ -213,11 +213,11 @@ jest.mock(\`./transform.fnk\`, () => ({
   jest.requireActual(\`./transform\`)
 }));
 
-const foo = mock => mock(\`not jest.mock\`);
+const foo = (mock) => mock(\`not jest.mock\`);
 
 exports.foo = foo;",
   "map": Object {
-    "mappings": ";AAAC,EAAA,E;AAAI,EAAA,I;AAAM,EAAA,O;AAAS,EAAA;YAAyB,oB;;AAE7C;AAAA,UAAI,iBAAJ,EAAwB,OAAI;AAC1B,EAAA,MAAA,EAAQ,OADkB,EAAA;AAE1B,EAAA,KAAA;AAAO;AAAA,qBAAc,aAAd;AAFmB,CAAJ,CAAxB;;AAIA,MAAA,GAAG,GAAG,IAAA,IACJ,IAAI,CADN,eACM,CADN;;QAAA,G,GAAA,G",
+    "mappings": ";AAAC,EAAA,E;AAAI,EAAA,I;AAAM,EAAA,O;AAAS,EAAA;YAAyB,oB;;AAE7C;AAAA,UAAI,iBAAJ,EAAwB,OAAI;AAC1B,EAAA,MAAA,EAAQ,OADkB,EAAA;AAE1B,EAAA,KAAA;AAAO;AAAA,qBAAc,aAAd;AAFmB,CAAJ,CAAxB;;AAIA,MAAA,GAAG,GAAM,CAAA,IAAH,KACJ,IAAI,CADN,eACM,CADN;;QAAA,G,GAAA,G",
     "names": Array [],
     "sources": Array [
       "/temp/src/foobar.fnk",

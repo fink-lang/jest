@@ -6,9 +6,9 @@
     "node": ">=14.0.0"
   },
   "exports": {
-    "./": {
-      "import": "./",
-      "require": "./cjs/"
+    "./*": {
+      "import": "./*",
+      "require": "./cjs/*"
     }
   },
   "type": "module",
