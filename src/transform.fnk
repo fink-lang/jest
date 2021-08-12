@@ -3,13 +3,19 @@
 
 {parse} = import '@fink/larix/parser.fnk'
 {generate} = import '@fink/loxia/generate.fnk'
+
 {starts_with} = import '@fink/std-lib/str.fnk'
-{error, is_error} = import '@fink/std-lib/error.fnk'
+
+{throw_err, error} = import '@fink/js-interop/errors.js'
+{is_instance} = import '@fink/js-interop/reflect.js'
+{Error} = import '@fink/js-interop/globals.js'
 
 
 babel_istanbul = import 'babel-plugin-istanbul'
 
 [no_result] = []
+
+is_error =  fn err: is_instance err, Error
 
 
 istanbul_plugin = fn cwd, input_source_map:
@@ -88,9 +94,9 @@ handle_error = fn obj_with_errors:
       {errors: [err]} = obj_with_errors
       match err:
         is_error ?:
-          throw err
+          throw_err err
         else:
-          throw error err.error, {stack: err.stack}
+          throw_err error err.error, {stack: err.stack}
     else:
       obj_with_errors
 
