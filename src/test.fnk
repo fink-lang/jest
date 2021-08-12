@@ -54,15 +54,15 @@ to_not_equal = fn expected: fn expect_actual:
 
 
 to_match_snapshot = fn expect_actual:
-  expect_actual.toMatchSnapshot ()
+  expect_actual.toMatchSnapshot _
 
 
 
 was_called = fn expect_actual:
-  expect_actual.toBeCalled ()
+  expect_actual.toBeCalled _
 
 was_not_called = fn expect_actual:
-  expect_actual.not.toBeCalled ()
+  expect_actual.not.toBeCalled _
 
 
 
