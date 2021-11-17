@@ -23,7 +23,7 @@ Object {
   "code": "/* istanbul ignore next */
 function cov_2ozalsxixv() {
   var path = \\"/temp/src/foobar.fnk\\";
-  var hash = \\"506f7272183f6ec5aca58b5b5dfb89dafa2b8156\\";
+  var hash = \\"1041f008da8ccd7b75e9eb63abff72f84a5bb4b3\\";
   var global = new Function(\\"return this\\")();
   var gcv = \\"__coverage__\\";
   var coverageData = {
@@ -97,12 +97,12 @@ function cov_2ozalsxixv() {
     inputSourceMap: {
       version: 3,
       sources: [\\"/temp/src/foobar.fnk\\"],
-      names: [],
-      mappings: \\"AAAA,MAAA,GAAG,GAAG,QAAQ,IAAd;QAAA,G,GAAA,G\\",
+      names: [\\"foo\\", \\"spam\\"],
+      mappings: \\"AAAA,MAAAA,GAAG,GAAG,QAAQC,IAAd;QAAAD,G,GAAAA,G\\",
       sourcesContent: [\\"foo = 1234 or spam\\"]
     },
     _coverageSchema: \\"1a1c01bbd47fc00a2c39e90264f33305004495a9\\",
-    hash: \\"506f7272183f6ec5aca58b5b5dfb89dafa2b8156\\"
+    hash: \\"1041f008da8ccd7b75e9eb63abff72f84a5bb4b3\\"
   };
   var coverage = global[gcv] || (global[gcv] = {});
 
@@ -153,8 +153,11 @@ Object {
 } = spam(\`ni\`);
 mock(\`not a jest mock\`);",
   "map": Object {
-    "mappings": "AAAA,MAAA;AAAC,EAAA;AAAD,IAAS,IAAI,CAAb,IAAa,CAAb;AAEA,IAAI,CAAJ,iBAAI,CAAJ",
-    "names": Array [],
+    "mappings": "AAAA,MAAA;AAAC,EAAA;AAAD,IAASA,IAAI,CAAb,IAAa,CAAb;AAEAC,IAAI,CAAJA,iBAAI,CAAJA",
+    "names": Array [
+      "spam",
+      "mock",
+    ],
     "sources": Array [
       "/temp/src/foobar.fnk",
     ],
@@ -179,8 +182,11 @@ Object {
 mock(\`not a jest mock\`);
 require_actual(\`not a module\`);",
   "map": Object {
-    "mappings": ";AAAC,EAAA,I;AAAM,EAAA;YAAyB,c;;AAEhC,IAAI,CAAJ,iBAAI,CAAJ;AACA,cAAc,CAAd,cAAc,CAAd",
-    "names": Array [],
+    "mappings": ";AAACA,EAAAA,I;AAAMC,EAAAA;YAAyB,c;;AAEhCD,IAAI,CAAJA,iBAAI,CAAJA;AACAC,cAAc,CAAdA,cAAc,CAAdA",
+    "names": Array [
+      "mock",
+      "require_actual",
+    ],
     "sources": Array [
       "/temp/src/foobar.fnk",
     ],
@@ -217,8 +223,13 @@ const foo = (mock) => mock(\`not jest.mock\`);
 
 exports.foo = foo;",
   "map": Object {
-    "mappings": ";AAAC,EAAA,E;AAAI,EAAA,I;AAAM,EAAA,O;AAAS,EAAA;YAAyB,oB;;AAE7C;AAAA,UAAI,iBAAJ,EAAwB,OAAI;AAC1B,EAAA,MAAA,EAAQ,OADkB,EAAA;AAE1B,EAAA,KAAA;AAAO;AAAA,qBAAc,aAAd;AAFmB,CAAJ,CAAxB;;AAIA,MAAA,GAAG,GAAM,CAAA,IAAH,KACJ,IAAI,CADN,eACM,CADN;;QAAA,G,GAAA,G",
-    "names": Array [],
+    "mappings": ";AAACA,EAAAA,E;AAAIC,EAAAA,I;AAAMC,EAAAA,O;AAASC,EAAAA;YAAyB,oB;;AAE7CF;AAAAA,UAAI,iBAAJA,EAAwB,OAAI;AAC1B,EAAA,MAAA,EAAQC,OADkB,EAAA;AAE1B,EAAA,KAAA;AAAOC;AAAAA,qBAAc,aAAdA;AAFmB,CAAJ,CAAxBF;;AAIA,MAAA,GAAG,GAAMA,CAAAA,IAAH,KACJA,IAAI,CADN,eACM,CADN;;QAAA,G,GAAA,G",
+    "names": Array [
+      "it",
+      "mock",
+      "mock_fn",
+      "require_actual",
+    ],
     "sources": Array [
       "/temp/src/foobar.fnk",
     ],
