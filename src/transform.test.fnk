@@ -48,6 +48,26 @@ describe process, fn:
       to_match_snapshot
 
 
+  it 'transforms renamed imports from @fink/jest as jest.mock', fn:
+    {code, map} = process
+      "
+        {it, mock: mock_mod, mock_fn, require_actual: imp_real_mod} = import '@fink/jest/test.fnk'
+
+        mock_mod './transform.fnk', fn: rec:
+          foobar: mock_fn _
+          shrub: imp_real_mod './transform'
+
+        foo = fn mock:
+          mock 'not jest.mock'
+      "
+      '/temp/src/foobar.fnk'
+      {rootDir: '/temp/src'}
+
+    expect
+      {code, map}
+      to_match_snapshot
+
+
   it 'ignores transforming mock not imported from @fink/jest', fn:
     {code, map} = process
       "

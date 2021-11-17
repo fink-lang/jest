@@ -248,3 +248,52 @@ foo = fn mock:
   },
 }
 `;
+
+exports[`process transforms renamed imports from @fink/jest as jest.mock 1`] = `
+Object {
+  "code": "const {
+  it,
+  mock: mock_mod,
+  mock_fn,
+  require_actual: imp_real_mod
+} = require(\\"@fink/jest/test.js\\");
+
+/* istanbul ignore next */
+jest.mock(\`./transform.fnk\`, () => ({
+  foobar: mock_fn(),
+  shrub:
+  /* istanbul ignore next */
+  jest.requireActual(\`./transform\`)
+}));
+
+const foo = (mock) => mock(\`not jest.mock\`);
+
+exports.foo = foo;",
+  "map": Object {
+    "mappings": ";AAACA,EAAAA,E;AAAIC,EAAAA,I,EAAMC,Q;AAAUC,EAAAA,O;AAASC,EAAAA,c,EAAgBC;YAAuB,oB;;AAErEH;AAAAA,UAAQ,iBAARA,EAA4B,OAAI;AAC9B,EAAA,MAAA,EAAQC,OADsB,EAAA;AAE9B,EAAA,KAAA;AAAOE;AAAAA,qBAAY,aAAZA;AAFuB,CAAJ,CAA5BH;;AAIA,MAAA,GAAG,GAAMD,CAAAA,IAAH,KACJA,IAAI,CADN,eACM,CADN;;QAAA,G,GAAA,G",
+    "names": Array [
+      "it",
+      "mock",
+      "mock_mod",
+      "mock_fn",
+      "require_actual",
+      "imp_real_mod",
+    ],
+    "sources": Array [
+      "/temp/src/foobar.fnk",
+    ],
+    "sourcesContent": Array [
+      "{it, mock: mock_mod, mock_fn, require_actual: imp_real_mod} = import '@fink/jest/test.fnk'
+
+mock_mod './transform.fnk', fn: rec:
+  foobar: mock_fn _
+  shrub: imp_real_mod './transform'
+
+foo = fn mock:
+  mock 'not jest.mock'
+",
+    ],
+    "version": 3,
+  },
+}
+`;

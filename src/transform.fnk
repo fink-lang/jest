@@ -5,6 +5,7 @@
 {generate} = import '@fink/loxia/generate.fnk'
 
 {starts_with} = import '@fink/std-lib/str.fnk'
+{next, filter} = import '@fink/std-lib/iter.fnk'
 
 {throw_err, error} = import '@fink/js-interop/errors.js'
 {is_instance} = import '@fink/js-interop/reflect.js'
@@ -34,7 +35,8 @@ module_scope = fn scope:
     else: scope
 
 
-is_import_from_fink_jest = fn init:
+
+is_require_fink_jest = fn init:
   match init:
    {callee: {name: 'require'}, arguments: [{value: starts_with ?, '@fink/jest/'}]}:
       true
@@ -42,13 +44,36 @@ is_import_from_fink_jest = fn init:
       false
 
 
-is_imported = fn ident, name:
-  {bindings} = module_scope ident.scope
-  match bindings.(name):
+has_key_val = fn obj_pattern, key, value:
+  pipe obj_pattern.properties:
+    filter fn prop:
+      match prop:
+        {key: {name: key}, value: {name: value}}: true
+        else: false
+    next ?
+    fn [prop=false]:
+      prop != false
+
+
+is_import_from_fink_jest_as = fn var_decl, imp_name, name:
+  match var_decl:
+    {init: not is_require_fink_jest ?}: false
+    {id: has_key_val ?, imp_name, name}: true
+    else: false
+
+
+
+needs_real_jest_func = fn ident, imp_name:
+  {name} =  ident.node
+  {bindings: {(name): binding}} = module_scope ident.scope
+
+  match binding:
     {referencePaths: not ?.includes ident}:
       false
-    {path: {node: {init: is_import_from_fink_jest ?}}}:
+
+    {path: {node: is_import_from_fink_jest_as ?, imp_name, name}}:
       true
+
     else:
       false
 
@@ -59,10 +84,7 @@ mock_plugin = fn:
       CallExpression: fn path:
         callee = path.get 'callee'
         match callee:
-          {node: {name: ? != 'mock'}}:
-            false
-
-          is_imported ?, 'mock':
+          needs_real_jest_func ?, 'mock':
             callee.replaceWith
               memberExpression
                 identifier 'jest'
@@ -76,10 +98,7 @@ require_actual_plugin = fn:
       CallExpression: fn path:
         callee = path.get 'callee'
         match callee:
-          {node: {name: ? != 'require_actual'}}:
-            false
-
-          is_imported ?, 'require_actual':
+          needs_real_jest_func ?, 'require_actual':
             callee.replaceWith
               memberExpression
                 identifier 'jest'
