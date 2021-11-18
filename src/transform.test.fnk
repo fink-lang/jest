@@ -3,7 +3,7 @@
 
 
 
-describe process, fn:
+describe 'process', fn:
 
   it 'compiles fink', fn:
     {code, map} = process
@@ -57,8 +57,8 @@ describe process, fn:
           foobar: mock_fn _
           shrub: imp_real_mod './transform'
 
-        foo = fn mock:
-          mock 'not jest.mock'
+        foo = fn mock_mod:
+          mock_mod 'not jest.mock'
       "
       '/temp/src/foobar.fnk'
       {rootDir: '/temp/src'}
@@ -112,13 +112,10 @@ describe process, fn:
 
   it 'handles loxia errors', fn:
     expect
-      fn: process '123 = foo', 'foobar.fnk', {rootDir: './src'}
-      to_throw "
-        foobar.fnk:1:0
-        1| 123 = foo
-           ^
+      fn: process '
+          foo = match shrub:
+            {}: ni
 
-        Unable to transform `assign =`.
-
-        TypeError: Property left of AssignmentExpression expected node to be of a type [\"LVal\"] but instead got \"NumericLiteral\"
-        "
+        ', 'foobar.fnk', {rootDir: './src'}
+      to_throw
+        "Cannot read properties of undefined (reading '1')"

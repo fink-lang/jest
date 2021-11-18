@@ -31,7 +31,7 @@ istanbul_plugin = fn cwd, input_source_map:
 
 module_scope = fn scope:
   match scope:
-    {parent: {}}: module_scope scope.parent
+    {parent: ?}: module_scope scope.parent
     else: scope
 
 
@@ -63,15 +63,16 @@ is_import_from_fink_jest_as = fn var_decl, imp_name, name:
 
 
 
+
 needs_real_jest_func = fn ident, imp_name:
   {name} =  ident.node
   {bindings: {(name): binding}} = module_scope ident.scope
 
   match binding:
-    {referencePaths: not ?.includes ident}:
-      false
-
-    {path: {node: is_import_from_fink_jest_as ?, imp_name, name}}:
+    {
+      referencePaths: ?.includes ident
+      path: {node: is_import_from_fink_jest_as ?, imp_name, name}
+    }:
       true
 
     else:
@@ -109,7 +110,7 @@ require_actual_plugin = fn:
 
 handle_error = fn obj_with_errors:
   match obj_with_errors:
-    {errors: [{}]}:
+    {errors: [?]}:
       {errors: [err]} = obj_with_errors
       match err:
         is_error ?:
@@ -123,6 +124,7 @@ handle_error = fn obj_with_errors:
 transform = fn source, filename:
   ast = parse source, filename
   handle_error ast
+
   opts = rec:
     module_type: 'cjs'
     source_maps: true

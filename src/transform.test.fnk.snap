@@ -2,11 +2,13 @@
 
 exports[`process compiles fink 1`] = `
 Object {
-  "code": "const foo = 1234 || spam;
-exports.foo = foo;",
+  "code": "const foo_0 = 1234 || spam;
+exports.foo = foo_0;",
   "map": Object {
-    "mappings": "AAAA,MAAA,GAAG,GAAG,QAAN,IAAA;QAAA,G,GAAA,G",
-    "names": Array [],
+    "mappings": "AAAAA,MAAAA,KAAG,GAAG,QAANA,IAAAA;AAAAA,OAAAA,CAAAA,GAAAA,GAAAA,KAAAA",
+    "names": Array [
+      "foo",
+    ],
     "sources": Array [
       "/temp/src/foobar.fnk",
     ],
@@ -23,7 +25,7 @@ Object {
   "code": "/* istanbul ignore next */
 function cov_2ozalsxixv() {
   var path = \\"/temp/src/foobar.fnk\\";
-  var hash = \\"1041f008da8ccd7b75e9eb63abff72f84a5bb4b3\\";
+  var hash = \\"46903f76ea802de43c58a983fde0936845313022\\";
   var global = new Function(\\"return this\\")();
   var gcv = \\"__coverage__\\";
   var coverageData = {
@@ -32,11 +34,11 @@ function cov_2ozalsxixv() {
       \\"0\\": {
         start: {
           line: 1,
-          column: 12
+          column: 14
         },
         end: {
           line: 1,
-          column: 24
+          column: 26
         }
       },
       \\"1\\": {
@@ -46,7 +48,7 @@ function cov_2ozalsxixv() {
         },
         end: {
           line: 2,
-          column: 18
+          column: 20
         }
       }
     },
@@ -56,31 +58,31 @@ function cov_2ozalsxixv() {
         loc: {
           start: {
             line: 1,
-            column: 12
+            column: 14
           },
           end: {
             line: 1,
-            column: 24
+            column: 26
           }
         },
         type: \\"binary-expr\\",
         locations: [{
           start: {
             line: 1,
-            column: 12
+            column: 14
           },
           end: {
             line: 1,
-            column: 16
+            column: 18
           }
         }, {
           start: {
             line: 1,
-            column: 20
+            column: 22
           },
           end: {
             line: 1,
-            column: 24
+            column: 26
           }
         }],
         line: 1
@@ -98,11 +100,11 @@ function cov_2ozalsxixv() {
       version: 3,
       sources: [\\"/temp/src/foobar.fnk\\"],
       names: [\\"foo\\", \\"spam\\"],
-      mappings: \\"AAAA,MAAAA,GAAG,GAAG,QAAQC,IAAd;QAAAD,G,GAAAA,G\\",
+      mappings: \\"AAAAA,MAAAA,KAAG,GAAG,QAAQC,IAAdD;AAAAA,QAAAA,GAAG,GAAHA\\",
       sourcesContent: [\\"foo = 1234 or spam\\"]
     },
     _coverageSchema: \\"1a1c01bbd47fc00a2c39e90264f33305004495a9\\",
-    hash: \\"1041f008da8ccd7b75e9eb63abff72f84a5bb4b3\\"
+    hash: \\"46903f76ea802de43c58a983fde0936845313022\\"
   };
   var coverage = global[gcv] || (global[gcv] = {});
 
@@ -121,7 +123,7 @@ function cov_2ozalsxixv() {
 }
 
 cov_2ozalsxixv();
-const foo =
+const foo_0 =
 /* istanbul ignore next */
 (cov_2ozalsxixv().s[0]++,
 /* istanbul ignore next */
@@ -131,10 +133,12 @@ const foo =
 
 /* istanbul ignore next */
 cov_2ozalsxixv().s[1]++;
-exports.foo = foo;",
+exports.foo = foo_0;",
   "map": Object {
-    "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA,MAAA,GAAG;AAAA;AAAA;AAAG;AAAA;AAAA;AAAA,6BAAN,IAAM,CAAH,CAAH;;;;QAAA,G,GAAA,G",
-    "names": Array [],
+    "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAAA,MAAAA,KAAG;AAAA;AAAA;AAAG;AAAA;AAAA;AAAA,6BAANA,IAAM,CAAH,CAAHA;;;;AAAAA,OAAAA,CAAAA,GAAAA,GAAAA,KAAAA",
+    "names": Array [
+      "foo",
+    ],
     "sources": Array [
       "/temp/src/foobar.fnk",
     ],
@@ -148,14 +152,11 @@ exports.foo = foo;",
 
 exports[`process ignores transforming mock not imported 1`] = `
 Object {
-  "code": "const {
-  mock
-} = spam(\`ni\`);
-mock(\`not a jest mock\`);",
+  "code": "const drec_0 = spam(\`ni\`);
+drec_0.mock(\`not a jest mock\`);",
   "map": Object {
-    "mappings": "AAAA,MAAA;AAAC,EAAA;AAAD,IAASA,IAAI,CAAb,IAAa,CAAb;AAEAC,IAAI,CAAJA,iBAAI,CAAJA",
+    "mappings": "AAAS,MAAA,MAAS,GAAT,IAAI,CAAJ,IAAI,CAAJ;AAAA,MAETA,CAFCA,IAAQ,CAETA,iBAFS",
     "names": Array [
-      "spam",
       "mock",
     ],
     "sources": Array [
@@ -175,14 +176,17 @@ mock 'not a jest mock'
 exports[`process ignores transforming mock not imported from @fink/jest 1`] = `
 Object {
   "code": "const {
-  mock,
-  require_actual
+  mock: mock_0
 } = require(\\"./foobar.fnk\\");
 
-mock(\`not a jest mock\`);
-require_actual(\`not a module\`);",
+const {
+  require_actual: require_actual_0
+} = require(\\"./foobar.fnk\\");
+
+mock_0(\`not a jest mock\`);
+require_actual_0(\`not a module\`);",
   "map": Object {
-    "mappings": ";AAACA,EAAAA,I;AAAMC,EAAAA;YAAyB,c;;AAEhCD,IAAI,CAAJA,iBAAI,CAAJA;AACAC,cAAc,CAAdA,cAAc,CAAdA",
+    "mappings": ";QAACA;;;;kBAAMC;;;AAEPD,MAAI,CAAJA,iBAAI,CAAJA;AACAC,gBAAc,CAAdA,cAAc,CAAdA",
     "names": Array [
       "mock",
       "require_actual",
@@ -204,31 +208,51 @@ require_actual 'not a module'
 
 exports[`process transforms mock imported from @fink/jest as jest.mock 1`] = `
 Object {
-  "code": "const {
-  it,
-  mock,
-  mock_fn,
-  require_actual
+  "code": "require(\\"@fink/jest/test.js\\");
+
+const {
+  mock: mock_0
+} = require(\\"@fink/jest/test.js\\");
+
+const {
+  mock_fn: mock_fn_0
+} = require(\\"@fink/jest/test.js\\");
+
+const {
+  require_actual: require_actual_0
 } = require(\\"@fink/jest/test.js\\");
 
 /* istanbul ignore next */
-jest.mock(\`./transform.fnk\`, () => ({
-  foobar: mock_fn(),
-  shrub:
+jest.mock(\`./transform.fnk\`, () => {
+  const val_1 = mock_fn_0();
+  const val_0 =
   /* istanbul ignore next */
-  jest.requireActual(\`./transform\`)
-}));
+  jest.requireActual(\`./transform\`);
+  /* istanbul ignore next */
 
-const foo = (mock) => mock(\`not jest.mock\`);
+  return {
+    foobar: val_1,
+    shrub: val_0
+  };
+});
 
-exports.foo = foo;",
+const foo_0 = (mock_1) => {
+  const result_1 = mock_1(\`not jest.mock\`);
+  /* istanbul ignore next */
+
+  return result_1;
+};
+
+exports.foo = foo_0;",
   "map": Object {
-    "mappings": ";AAACA,EAAAA,E;AAAIC,EAAAA,I;AAAMC,EAAAA,O;AAASC,EAAAA;YAAyB,oB;;AAE7CF;AAAAA,UAAI,iBAAJA,EAAwB,OAAI;AAC1B,EAAA,MAAA,EAAQC,OADkB,EAAA;AAE1B,EAAA,KAAA;AAAOC;AAAAA,qBAAc,aAAdA;AAFmB,CAAJ,CAAxBF;;AAIA,MAAA,GAAG,GAAMA,CAAAA,IAAH,KACJA,IAAI,CADN,eACM,CADN;;QAAA,G,GAAA,G",
+    "mappings": ";;;QAAKA;;;;WAAMC;;;;kBAASC;;;AAEpBF;AAAAA,UAAI,iBAAJA,EAAwB,MAAA;AACd,QAAA,KAAS,GAAT,SAAA,EAAA;AACD,QAAA,KAA4B;AAA5B;AAAA,qBAAA,aAAA,CAAA;AAFe;;AAAI,SAAA;AAC1BG,IAAAA,MAD0B,EAAA,KAAA;AAE1BC,IAAAA,KAF0B,EAEnB;AAFmB,GAAA;AAA5BJ,CAAAA;;AAIAK,MAAAA,KAAG,GAAML,CAAAA,MAAH,KAAA;AACJ,QAAA,QACF,GADE,MAAI,CAAJ,eAAI,CAAJ;AADI;;AACJ,SAAA,QAAA;AADFK,CAAAA;;AAAAA,OAAAA,CAAAA,GAAAA,GAAAA,KAAAA",
     "names": Array [
-      "it",
       "mock",
       "mock_fn",
       "require_actual",
+      "foobar",
+      "shrub",
+      "foo",
     ],
     "sources": Array [
       "/temp/src/foobar.fnk",
@@ -251,33 +275,51 @@ foo = fn mock:
 
 exports[`process transforms renamed imports from @fink/jest as jest.mock 1`] = `
 Object {
-  "code": "const {
-  it,
-  mock: mock_mod,
-  mock_fn,
-  require_actual: imp_real_mod
+  "code": "require(\\"@fink/jest/test.js\\");
+
+const {
+  mock: mock_mod_0
+} = require(\\"@fink/jest/test.js\\");
+
+const {
+  mock_fn: mock_fn_0
+} = require(\\"@fink/jest/test.js\\");
+
+const {
+  require_actual: imp_real_mod_0
 } = require(\\"@fink/jest/test.js\\");
 
 /* istanbul ignore next */
-jest.mock(\`./transform.fnk\`, () => ({
-  foobar: mock_fn(),
-  shrub:
+jest.mock(\`./transform.fnk\`, () => {
+  const val_1 = mock_fn_0();
+  const val_0 =
   /* istanbul ignore next */
-  jest.requireActual(\`./transform\`)
-}));
+  jest.requireActual(\`./transform\`);
+  /* istanbul ignore next */
 
-const foo = (mock) => mock(\`not jest.mock\`);
+  return {
+    foobar: val_1,
+    shrub: val_0
+  };
+});
 
-exports.foo = foo;",
+const foo_0 = (mock_mod_1) => {
+  const result_1 = mock_mod_1(\`not jest.mock\`);
+  /* istanbul ignore next */
+
+  return result_1;
+};
+
+exports.foo = foo_0;",
   "map": Object {
-    "mappings": ";AAACA,EAAAA,E;AAAIC,EAAAA,I,EAAMC,Q;AAAUC,EAAAA,O;AAASC,EAAAA,c,EAAgBC;YAAuB,oB;;AAErEH;AAAAA,UAAQ,iBAARA,EAA4B,OAAI;AAC9B,EAAA,MAAA,EAAQC,OADsB,EAAA;AAE9B,EAAA,KAAA;AAAOE;AAAAA,qBAAY,aAAZA;AAFuB,CAAJ,CAA5BH;;AAIA,MAAA,GAAG,GAAMD,CAAAA,IAAH,KACJA,IAAI,CADN,eACM,CADN;;QAAA,G,GAAA,G",
+    "mappings": ";;;QAAWA;;;;WAAUC;;;;kBAAyBC;;;AAE9CF;AAAAA,UAAQ,iBAARA,EAA4B,MAAA;AAClB,QAAA,KAAS,GAAT,SAAA,EAAA;AACD,QAAA,KAA0B;AAA1B;AAAA,qBAAA,aAAA,CAAA;AAFmB;;AAAI,SAAA;AAC9BG,IAAAA,MAD8B,EAAA,KAAA;AAE9BC,IAAAA,KAF8B,EAEvB;AAFuB,GAAA;AAAhCJ,CAAAA;;AAIAK,MAAAA,KAAG,GAAML,CAAAA,UAAH,KAAA;AACJ,QAAA,QACF,GADE,UAAQ,CAAR,eAAQ,CAAR;AADI;;AACJ,SAAA,QAAA;AADFK,CAAAA;;AAAAA,OAAAA,CAAAA,GAAAA,GAAAA,KAAAA",
     "names": Array [
-      "it",
-      "mock",
       "mock_mod",
       "mock_fn",
-      "require_actual",
       "imp_real_mod",
+      "foobar",
+      "shrub",
+      "foo",
     ],
     "sources": Array [
       "/temp/src/foobar.fnk",
@@ -289,8 +331,8 @@ mock_mod './transform.fnk', fn: rec:
   foobar: mock_fn _
   shrub: imp_real_mod './transform'
 
-foo = fn mock:
-  mock 'not jest.mock'
+foo = fn mock_mod:
+  mock_mod 'not jest.mock'
 ",
     ],
     "version": 3,
